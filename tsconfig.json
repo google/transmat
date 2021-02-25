@@ -1,0 +1,14 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "lib": ["es2018", "dom"],
+  },
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+  ]
+}
