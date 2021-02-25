@@ -19,7 +19,7 @@ import {TransmatObserver} from './transmat_observer';
 /**
  * This test just checks the code, the actual behavior is a bit harder to test.
  * For now, this should be done manually with the files from /experiments.
- * @todo(b/xxx) Improve tests for the TransmatObserver.
+ * @TODO Improve tests for the TransmatObserver.
  */
 describe('TransmatObserver', () => {
   let callback: jasmine.Spy;

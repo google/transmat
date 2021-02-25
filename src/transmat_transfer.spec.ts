@@ -48,7 +48,7 @@ describe('TransmatTransfer', () => {
       });
 
       // Skipped, dropEffect doesn't seem to be changed in these tests.
-      // @todo(b/xxx) Fix the datatransfer.dropEffect test.
+      // @TODO Enable the datatransfer.dropEffect test.
       xit('changes the datatransfer.dropEffect', done => {
         const unlisten = TransmatTransfer.addReceiveListeners(tester, event => {
           const transfer = new TransmatTransfer(event);
