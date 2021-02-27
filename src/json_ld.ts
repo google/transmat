@@ -15,7 +15,6 @@
  */
 
 import {Thing, WithContext} from 'schema-dts';
-import {TransmatTransfer} from './transmat_transfer';
 
 /** Mime type for JSON-LD data. */
 export const MIME_TYPE = 'application/ld+json';

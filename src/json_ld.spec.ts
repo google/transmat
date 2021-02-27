@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import {TransmatTransfer} from './transmat_transfer';
 import * as jsonLd from './json_ld';
 import {Person} from 'schema-dts';
 
