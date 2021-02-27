@@ -17,7 +17,7 @@
 /** Events that contain a DataTransfer instance. */
 export type DataTransferEvent = DragEvent | ClipboardEvent;
 
-/** Options for DataTransfer's dropEffect and allowEffect properies. */
+/** Options for DataTransfer's dropEffect and allowEffect properties. */
 export type DataTransferDropEffect = 'move' | 'copy' | 'none' | 'link';
 
 /** Returns the DataTransfer object from the event, or throws an error. */

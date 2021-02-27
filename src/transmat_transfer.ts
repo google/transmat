@@ -100,18 +100,18 @@ export class TransmatTransfer {
   static addTransmitListeners(
     target: EventTarget,
     listener: (event: DataTransferEvent) => void,
-    options = {dragdrop: true, copypaste: true}
+    options = {dragDrop: true, copyPaste: true}
   ): () => void {
     const eventTypes: string[] = [];
-    if (options.dragdrop) eventTypes.push('dragstart');
-    if (options.copypaste) eventTypes.push('cut', 'copy');
+    if (options.dragDrop) eventTypes.push('dragstart');
+    if (options.copyPaste) eventTypes.push('cut', 'copy');
     return addEventListeners(target, eventTypes, event => {
       listener(event as DataTransferEvent);
 
       // The default behavior of copy and cut needs to be prevented, otherwise
       // DataTransfer won't work.
       if (
-        options.copypaste &&
+        options.copyPaste &&
         (event.type === 'copy' || event.type === 'cut')
       ) {
         event.preventDefault();
@@ -126,11 +126,11 @@ export class TransmatTransfer {
   static addReceiveListeners(
     target: EventTarget,
     listener: (event: DataTransferEvent) => void,
-    options = {dragdrop: true, copypaste: true}
+    options = {dragDrop: true, copyPaste: true}
   ): () => void {
     const eventTypes: string[] = [];
-    if (options.dragdrop) eventTypes.push('dragover', 'drop');
-    if (options.copypaste) eventTypes.push('paste');
+    if (options.dragDrop) eventTypes.push('dragover', 'drop');
+    if (options.copyPaste) eventTypes.push('paste');
     return addEventListeners(target, eventTypes, listener as EventListener);
   }
 }

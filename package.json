@@ -34,7 +34,6 @@
     "license": "$GOPATH/bin/addlicense -c \"Google LLC\" -l apache ./src ./experiments",
     "license-check": "jsgl --local .",
     "prepare": "npm run compile",
-    "posttest": "npm run lint"
   },
   "dependencies": {
     "schema-dts": "^0.8.2"

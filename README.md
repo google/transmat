@@ -29,10 +29,10 @@ TransmatTransfer.addTransmitListeners(myElement, event => {
 });
 ```
 
-When transfering the example from above, you can expect the following to happen
+When transferring the example from above, you can expect the following to happen
 depending on the receiving target;
 
-- WYSYWIG inputs like contentEditable, Google Docs, Gmail, Apple Pages will use
+- WYSIWYG inputs like contentEditable, Google Docs, Gmail, Apple Pages will use
   `text/html` data, and fallback to `text/plain`.
 - Text inputs like textareas, VSCode, will show `text/plain`.
 - Browsers will navigate the URLs listed in the `text/uri-list` data.
@@ -42,7 +42,7 @@ You can receive the DataTransfer payload by listening to the `drop` and `paste`
 events.
 
 ```js
-TransmatTransfer.addReceiveisteners(myElement, event => {
+TransmatTransfer.addReceiveListeners(myElement, event => {
   const myCustomMimeType = 'application/x.my-custom-type';
   const transmat = new TransmatTransfer(event);
   if(transmat.hasType(myCustomMimeType) && transmat.acceptTransfer()) {
@@ -55,7 +55,7 @@ TransmatTransfer.addReceiveisteners(myElement, event => {
 
 ## Connecting the web, and beyond
 The project's vision is to connect the web. By promoting the use of JSON-LD data
-transfers, applications will be able to speak the same language indepently from
+transfers, applications will be able to speak the same language independently from
 their implementation. With growing adoption, users will be able to transfer data
 without friction to any other applications, across the web. How cool is that?
 
@@ -116,21 +116,21 @@ them, etc. On the web, this is uncommon.
 We will need to educate users about this new capability, and ideally come up
 with UX patterns to make this recognizable.
 
-### Accessiblity
+### Accessibility
 Drag-drop is not a very accessible interaction, but the DataTransfer API works
 with copy-paste too.
 
 ### Security and privacy
 The data stored in the DataTransfer will be available to any application on the
-user's device. Keep this in mind when transfering sensitive data.
+user's device. Keep this in mind when transferring sensitive data.
 
-Receiving data should be threated like any any other user input; santize and
+Receiving data should be threated like any any other user input; sanitize and
 validate before using.
 
 ## Known quirks
 - Chrome strips newlines in `text/uri-list`. For now, you can only use this to
   transfer a single URI. https://crbug.com/239745
-- Transfering of generated files using `new File()` doesn't seem to be supported
+- Transferring of generated files using `new File()` doesn't seem to be supported
   well enough.
 - Webapplications can only read the payload (using
   [getData](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData))

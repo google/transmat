@@ -39,7 +39,7 @@ export function parse(input: string): MimeType {
   };
 }
 
-/** Match two mimetypes, with the first input as a base. */
+/** Match two mime-types, with the first input as a base. */
 export function match(src: MimeType, compare: MimeType): boolean {
   for (const key of [...src.params.keys()]) {
     if (src.params.get(key) !== compare.params.get(key)) {
