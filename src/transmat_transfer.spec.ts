@@ -46,21 +46,6 @@ describe('TransmatTransfer', () => {
         });
         tester.dispatchEvent(createDragEvent('dragover'));
       });
-
-      // Skipped, dropEffect doesn't seem to be changed in these tests.
-      // @TODO Enable the datatransfer.dropEffect test.
-      xit('changes the datatransfer.dropEffect', done => {
-        const unlisten = TransmatTransfer.addReceiveListeners(tester, event => {
-          const transfer = new TransmatTransfer(event);
-          transfer.acceptTransfer();
-          expect(transfer.dataTransfer.dropEffect).toBe('copy');
-          transfer.acceptTransfer('move');
-          expect(transfer.dataTransfer.dropEffect).toBe('move');
-          unlisten();
-          done();
-        });
-        tester.dispatchEvent(createDragEvent('dragover'));
-      });
     });
   });
 
