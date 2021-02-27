@@ -21,8 +21,8 @@ import {addEventListeners, removeEventListeners} from './utils';
 export interface TransmatObserverEntry {
   target: Element;
   event: DataTransferEvent;
-  active: boolean; // Whether a drag operation is active in this browser window.
-  dragover: boolean; // Whether it is beind dragged over.
+  isActive: boolean; // Whether a transfer operation is active in this window.
+  isTarget: boolean; // Whether the element is the active target (dragover).
 }
 
 /** Callback. */
@@ -52,17 +52,17 @@ export class TransmatObserver {
           event.target === document.body.parentElement);
 
       // Whether there is a drag happening on the page.
-      const active = event.type !== 'dragend' && !isLeavingDrag;
+      const isActive = event.type !== 'dragend' && !isLeavingDrag;
 
       // Whether the target is being dragged over.
-      const isTarget = hasNode(target, event.target as Node);
-      const dragover = isTarget && event.type === 'dragover';
+      const isTargetNode = hasNode(target, event.target as Node);
+      const isTarget = isTargetNode && event.type === 'dragover';
 
       records.push({
         target,
         event,
-        active,
-        dragover,
+        isActive,
+        isTarget,
       });
     }
 
@@ -123,7 +123,7 @@ function entryStatesEqual(
   }
   return a.every((av, index) => {
     const bv = b[index];
-    return av.active === bv.active && av.dragover === bv.dragover;
+    return av.isActive === bv.isActive && av.isTarget === bv.isTarget;
   });
 }
 

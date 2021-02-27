@@ -49,12 +49,12 @@ describe('jsonLd', () => {
       expect(
         jsonLd.fromObject<Person>({
           '@type': 'Person',
-          name: 'Rory Gilmore',
+          name: 'Bart Simpson',
         })
       ).toEqual({
         '@context': 'https://schema.org',
         '@type': 'Person',
-        name: 'Rory Gilmore',
+        name: 'Bart Simpson',
       });
     });
   });

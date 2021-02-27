@@ -43,7 +43,7 @@ describe('TransmatObserver', () => {
     it('will observe the target for dragover events', () => {
       const event = dispatchDragEvent('dragover', target);
       expect(callback).toHaveBeenCalledWith(
-        [{event, target, dragover: true, active: true}],
+        [{event, target, isTarget: true, isActive: true}],
         observer
       );
     });
@@ -51,7 +51,7 @@ describe('TransmatObserver', () => {
     it('will observe the target for dragend events', () => {
       const event = dispatchDragEvent('dragend', target);
       expect(callback).toHaveBeenCalledWith(
-        [{event, target, dragover: false, active: false}],
+        [{event, target, isTarget: false, isActive: false}],
         observer
       );
     });
@@ -59,7 +59,7 @@ describe('TransmatObserver', () => {
     it('will observe the root for dragend events', () => {
       const event = dispatchDragEvent('dragleave', document.body);
       expect(callback).toHaveBeenCalledWith(
-        [{event, target, dragover: false, active: false}],
+        [{event, target, isTarget: false, isActive: false}],
         observer
       );
     });
@@ -77,7 +77,7 @@ describe('TransmatObserver', () => {
       dispatchDragEvent('dragover', target);
       const event = dispatchDragEvent('dragend', target);
       expect(observer.takeRecords()).toEqual([
-        {event, target, dragover: false, active: false},
+        {event, target, isTarget: false, isActive: false},
       ]);
     });
   });

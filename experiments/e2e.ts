@@ -25,7 +25,7 @@ TransmatTransfer.addTransmitListeners(transmitEl, event => {
   const transfer = new TransmatTransfer(event);
   const jsonLdData = jsonLd.fromObject<Person>({
     '@type': 'Person',
-    name: 'Rory',
+    name: 'Rory Gilmore',
     affiliation: {
       '@type': 'School',
       name: 'Yale',
@@ -46,8 +46,8 @@ TransmatTransfer.addReceiveListeners(receiveEl, event => {
 
 const obs = new TransmatObserver(entries => {
   for (const entry of entries) {
-    entry.target.classList.toggle('drag-over', entry.dragover);
-    entry.target.classList.toggle('drag-active', entry.active);
+    entry.target.classList.toggle('drag-over', entry.isTarget);
+    entry.target.classList.toggle('drag-active', entry.isActive);
   }
 });
 obs.observe(receiveEl);

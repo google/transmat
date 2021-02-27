@@ -98,8 +98,8 @@ const obs = new TransmatObserver(entries => {
   for (const entry of entries) {
     const transmat = new TransmatTransfer(entry.event);
     if(transmat.hasMimeType(myCustomMimeType)) {
-      entry.target.classList.toggle('drag-over', entry.dragover);
-      entry.target.classList.toggle('drag-active', entry.active);
+      entry.target.classList.toggle('drag-over', entry.isTarget);
+      entry.target.classList.toggle('drag-active', entry.isActive);
     }
   }
 });
