@@ -15,30 +15,51 @@
  */
 
 body {
-  background: darkslateblue;
+  background: #483d8b;
   color: #e8eaed;
   font: 1em/1.4em Helvetica, sans-serif;
+  margin: 5vh 5vw;
 }
 
-.target {
-  margin: 10vh auto;
-  width: 300px;
-  height: 200px;
-  max-height: 30vh;
-  background: #8ab4f8;
-  color: #202124;
+/**
+ * At least in Chrome, when an element is set to draggable, user select is
+ * disabled. Re-enable this to allow the user to copy/cut the data.
+ */
+[draggable][tabindex] {
+  user-select: auto;
+}
+
+[draggable] {
   cursor: move;
+}
+
+.transmitter, .receiver {
+  margin: 10vh auto;
+  height: 35vh;
+  width: 60vw;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 8px;
 }
 
-.drag-active {
-  background: #bad3fb;
+.transmitter {
+  background: #8ab4f8;
+  color: #202124;
+  cursor: move;
 }
 
-.drag-over {
+.receiver {
+  border: dashed 2px #8ab4f8;
+  color: #8ab4f8;
+}
+
+.transmat-active {
+  animation: highlight-drop-area .5s ease-in-out alternate-reverse infinite;
+}
+
+.transmat-over {
+  animation: none;
   background: #eaf2fe;
 }
 
@@ -46,4 +67,9 @@ body {
   max-width: 900px;
   margin: 0 auto;
   font: .9em/1.6em 'Roboto Mono', monospace;
+}
+
+@keyframes highlight-drop-area {
+  from { background: rgba(255,255,255,0); }
+  to { background: rgba(255,255,255,.1); }
 }

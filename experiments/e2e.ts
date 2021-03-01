@@ -18,12 +18,12 @@ import {Person} from 'schema-dts';
 import {TransmatTransfer, TransmatObserver} from '../src';
 import * as jsonLd from '../src/json_ld';
 
-const transmitEl = document.querySelector('#transmitter');
-const receiveEl = document.querySelector('#receiver');
+const transmitEl = document.querySelector('.transmitter');
+const receiveEl = document.querySelector('.receiver');
 
 TransmatTransfer.addTransmitListeners(transmitEl, event => {
   const transfer = new TransmatTransfer(event);
-  const jsonLdData = jsonLd.fromObject<Person>({
+  const data = jsonLd.fromObject<Person>({
     '@type': 'Person',
     name: 'Rory Gilmore',
     affiliation: {
@@ -31,7 +31,7 @@ TransmatTransfer.addTransmitListeners(transmitEl, event => {
       name: 'Yale',
     },
   });
-  transfer.setData(jsonLd.MIME_TYPE, jsonLdData);
+  transfer.setData(jsonLd.MIME_TYPE, data);
 });
 
 TransmatTransfer.addReceiveListeners(receiveEl, event => {
@@ -46,8 +46,8 @@ TransmatTransfer.addReceiveListeners(receiveEl, event => {
 
 const obs = new TransmatObserver(entries => {
   for (const entry of entries) {
-    entry.target.classList.toggle('drag-over', entry.isTarget);
-    entry.target.classList.toggle('drag-active', entry.isActive);
+    entry.target.classList.toggle('transmat-over', entry.isTarget);
+    entry.target.classList.toggle('transmat-active', entry.isActive);
   }
 });
 obs.observe(receiveEl);
