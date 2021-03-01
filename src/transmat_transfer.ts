@@ -40,7 +40,7 @@ export class TransmatTransfer {
    * Tell the browser to proceed with the data transfer. Returns whether the
    * event is a receiving event, e.g. whether the data can be accessed.
    */
-  acceptTransfer(dropEffect?: DataTransferDropEffect): boolean {
+  accept(dropEffect?: DataTransferDropEffect): boolean {
     if (this.event.type === 'dragover') {
       if (dropEffect) {
         this.dataTransfer.dropEffect = dropEffect;

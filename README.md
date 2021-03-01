@@ -1,6 +1,5 @@
 # Transmat
-> Transfer data from between webpages, browsers, and applications on the user's
-> device. Transmat will ease the implementation of this native browser feature.
+> Transmat is a library that makes working with the DataTransfer browser API easier.
 
 ![Build status](https://github.com/google/transmat/actions/workflows/node.js.yml/badge.svg)
 
@@ -45,7 +44,7 @@ events.
 TransmatTransfer.addReceiveListeners(myElement, event => {
   const myCustomMimeType = 'application/x.my-custom-type';
   const transmat = new TransmatTransfer(event);
-  if(transmat.hasType(myCustomMimeType) && transmat.acceptTransfer()) {
+  if(transmat.hasType(myCustomMimeType) && transmat.accept()) {
     const dataString = transmat.getData(myCustomMimeType);
     const data = JSON.parse(dataString);
     console.log(data);
@@ -124,7 +123,7 @@ with copy-paste too.
 The data stored in the DataTransfer will be available to any application on the
 user's device. Keep this in mind when transferring sensitive data.
 
-Receiving data should be threated like any any other user input; sanitize and
+Receiving data should be treated like any other user input; sanitize and
 validate before using.
 
 ## Known quirks
@@ -134,7 +133,7 @@ validate before using.
   well enough.
 - Webapplications can only read the payload (using
   [getData](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData))
-  when finishing the transfer by dropping or pasting. While dragging , only the
+  when finishing the transfer by dropping or pasting. While dragging, only the
   [types](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/types)
   can be read.
 - The DataTransfer data keys are transformed to lowercase.

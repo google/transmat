@@ -21,8 +21,10 @@ import {addEventListeners, removeEventListeners} from './utils';
 export interface TransmatObserverEntry {
   target: Element;
   event: DataTransferEvent;
-  isActive: boolean; // Whether a transfer operation is active in this window.
-  isTarget: boolean; // Whether the element is the active target (dragover).
+  /** Whether a transfer operation is active in this window. */
+  isActive: boolean;
+  /** Whether the element is the active target (dragover). */
+  isTarget: boolean;
 }
 
 /** Callback. */
@@ -55,7 +57,7 @@ export class TransmatObserver {
       const isActive = event.type !== 'dragend' && !isLeavingDrag;
 
       // Whether the target is being dragged over.
-      const isTargetNode = hasNode(target, event.target as Node);
+      const isTargetNode = target.contains(event.target as Node);
       const isTarget = isTargetNode && event.type === 'dragover';
 
       records.push({
@@ -125,18 +127,4 @@ function entryStatesEqual(
     const bv = b[index];
     return av.isActive === bv.isActive && av.isTarget === bv.isTarget;
   });
-}
-
-/**
- * Whether the provided parent node contains the node. Traverses up from the
- * Node, instead of down from the parentNode.
- */
-function hasNode(parentNode: Node, node: Node | null): boolean {
-  while (node) {
-    if (node === parentNode) {
-      return true;
-    }
-    node = node.parentNode;
-  }
-  return false;
 }

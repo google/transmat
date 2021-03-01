@@ -36,7 +36,7 @@ TransmatTransfer.addTransmitListeners(transmitEl, event => {
 
 TransmatTransfer.addReceiveListeners(receiveEl, event => {
   const transfer = new TransmatTransfer(event);
-  if (transfer.hasType(jsonLd.MIME_TYPE) && transfer.acceptTransfer()) {
+  if (transfer.hasType(jsonLd.MIME_TYPE) && transfer.accept()) {
     const payload = jsonLd.parse<Person>(transfer.getData(jsonLd.MIME_TYPE));
 
     const message = `Hi ${payload['name']} from ${payload['affiliation']['name']}!`;

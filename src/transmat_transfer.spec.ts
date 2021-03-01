@@ -27,19 +27,19 @@ describe('TransmatTransfer', () => {
     tester.remove();
   });
 
-  describe('acceptTransfer', () => {
+  describe('accept', () => {
     it('returns true for drop and paste events', () => {
       const dropTransfer = new TransmatTransfer(createDragEvent('drop'));
       const pasteTransfer = new TransmatTransfer(createClipboardEvent('paste'));
-      expect(dropTransfer.acceptTransfer()).toBeTrue();
-      expect(pasteTransfer.acceptTransfer()).toBeTrue();
+      expect(dropTransfer.accept()).toBeTrue();
+      expect(pasteTransfer.accept()).toBeTrue();
     });
 
     describe('dragover', () => {
       it('calls preventDefault and return false', done => {
         const unlisten = TransmatTransfer.addReceiveListeners(tester, event => {
           const transfer = new TransmatTransfer(event);
-          expect(transfer.acceptTransfer()).toBeFalse();
+          expect(transfer.accept()).toBeFalse();
           expect(event.defaultPrevented).toBeTrue();
           unlisten();
           done();
