@@ -15,10 +15,10 @@ providing mime-types keys and their expected data, new integrations can happen,
 sometimes for free.
 
 ```js
-import {TransmatTransfer} from 'transmat';
+import {Transmat, addTransmitListeners} from 'transmat';
 
-TransmatTransfer.addTransmitListeners(myElement, event => {
-  const transmat = new TransmatTransfer(event);
+addTransmitListeners(myElement, event => {
+  const transmat = new Transmat(event);
   transmat.setData({
     'text/plain': 'This will show up in text fields',
     'text/html': '<img src="https://example.com/test.jpg" />',
@@ -41,9 +41,11 @@ You can receive the DataTransfer payload by listening to the `drop` and `paste`
 events.
 
 ```js
-TransmatTransfer.addReceiveListeners(myElement, event => {
+import {Transmat, addReceiveListeners} from 'transmat';
+
+addReceiveListeners(myElement, event => {
   const myCustomMimeType = 'application/x.my-custom-type';
-  const transmat = new TransmatTransfer(event);
+  const transmat = new Transmat(event);
   if(transmat.hasType(myCustomMimeType) && transmat.accept()) {
     const dataString = transmat.getData(myCustomMimeType);
     const data = JSON.parse(dataString);
@@ -60,11 +62,11 @@ without friction to any other applications, across the web. How cool is that?
 
 ```js
 import {Person} from 'schema-dts';
-import {TransmatTransfer} from 'transmat';
+import {Transmat} from 'transmat';
 import * as jsonLd from 'transmat/json_ld';
 
 // When transmitting...
-const transmat = new TransmatTransfer(event);
+const transmat = new Transmat(event);
 transmat.setData(jsonLd.MIME_TYPE, jsonLd.fromObject<Person>({
   "@type": "Person",
   "name": "Rory Gilmore",
@@ -91,11 +93,11 @@ You can make use of the included `TransmatObserver` class to respond to drag
 activity. Use this to for example highlight valid drop areas.
 
 ```js
-import {TransmatObserver} from 'transmat';
+import {TransmatObserver, Transmat} from 'transmat';
 
 const obs = new TransmatObserver(entries => {
   for (const entry of entries) {
-    const transmat = new TransmatTransfer(entry.event);
+    const transmat = new Transmat(entry.event);
     if(transmat.hasMimeType(myCustomMimeType)) {
       entry.target.classList.toggle('drag-over', entry.isTarget);
       entry.target.classList.toggle('drag-active', entry.isActive);
