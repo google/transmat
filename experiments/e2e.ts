@@ -15,14 +15,19 @@
  */
 
 import {Person} from 'schema-dts';
-import {TransmatTransfer, TransmatObserver} from '../src';
+import {
+  Transmat,
+  TransmatObserver,
+  addTransmitListeners,
+  addReceiveListeners,
+} from '../src';
 import * as jsonLd from '../src/json_ld';
 
 const transmitEl = document.querySelector('.transmitter');
 const receiveEl = document.querySelector('.receiver');
 
-TransmatTransfer.addTransmitListeners(transmitEl, event => {
-  const transfer = new TransmatTransfer(event);
+addTransmitListeners(transmitEl, event => {
+  const transfer = new Transmat(event);
   const data = jsonLd.fromObject<Person>({
     '@type': 'Person',
     name: 'Rory Gilmore',
@@ -34,8 +39,8 @@ TransmatTransfer.addTransmitListeners(transmitEl, event => {
   transfer.setData(jsonLd.MIME_TYPE, data);
 });
 
-TransmatTransfer.addReceiveListeners(receiveEl, event => {
-  const transfer = new TransmatTransfer(event);
+addReceiveListeners(receiveEl, event => {
+  const transfer = new Transmat(event);
   if (transfer.hasType(jsonLd.MIME_TYPE) && transfer.accept()) {
     const payload = jsonLd.parse<Person>(transfer.getData(jsonLd.MIME_TYPE));
 

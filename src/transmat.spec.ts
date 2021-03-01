@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import {TransmatTransfer} from './transmat_transfer';
+import {Transmat, addReceiveListeners} from './transmat';
 
-describe('TransmatTransfer', () => {
+describe('Transmat', () => {
   let tester: Element;
   beforeEach(() => {
     tester = document.createElement('div');
@@ -29,16 +29,16 @@ describe('TransmatTransfer', () => {
 
   describe('accept', () => {
     it('returns true for drop and paste events', () => {
-      const dropTransfer = new TransmatTransfer(createDragEvent('drop'));
-      const pasteTransfer = new TransmatTransfer(createClipboardEvent('paste'));
+      const dropTransfer = new Transmat(createDragEvent('drop'));
+      const pasteTransfer = new Transmat(createClipboardEvent('paste'));
       expect(dropTransfer.accept()).toBeTrue();
       expect(pasteTransfer.accept()).toBeTrue();
     });
 
     describe('dragover', () => {
       it('calls preventDefault and return false', done => {
-        const unlisten = TransmatTransfer.addReceiveListeners(tester, event => {
-          const transfer = new TransmatTransfer(event);
+        const unlisten = addReceiveListeners(tester, event => {
+          const transfer = new Transmat(event);
           expect(transfer.accept()).toBeFalse();
           expect(event.defaultPrevented).toBeTrue();
           unlisten();
@@ -56,7 +56,7 @@ describe('TransmatTransfer', () => {
       event.dataTransfer.setData('text', 'text value');
       event.dataTransfer.setData('application/json+ld;identifier=Thing', '42');
 
-      const t = new TransmatTransfer(event);
+      const t = new Transmat(event);
       expect(t.hasType('foo')).toBeTrue();
       expect(t.hasType('text')).toBeTrue();
       expect(t.hasType('text/plain')).toBeTrue();
@@ -73,7 +73,7 @@ describe('TransmatTransfer', () => {
       const event = createDragEvent('drop');
       event.dataTransfer.setData('text/plain', 'foo value');
 
-      const t = new TransmatTransfer(event);
+      const t = new Transmat(event);
       expect(t.getData('text/plain')).toBe('foo value');
       expect(t.getData('bar')).toBe(undefined);
     });
@@ -82,14 +82,14 @@ describe('TransmatTransfer', () => {
   describe('setData', () => {
     it('sets a single data key-value pair', () => {
       const event = createDragEvent('drop');
-      const t = new TransmatTransfer(event);
+      const t = new Transmat(event);
       t.setData('text/plain', 'text value');
       expect(t.dataTransfer.getData('text/plain')).toBe('text value');
     });
 
     it('sets multiple data key-value pairs', () => {
       const event = createDragEvent('drop');
-      const t = new TransmatTransfer(event);
+      const t = new Transmat(event);
       t.setData({
         'text/plain': 'text value',
         'text/html': 'html value',
@@ -100,7 +100,7 @@ describe('TransmatTransfer', () => {
 
     it('coverts values to string', () => {
       const event = createDragEvent('drop');
-      const t = new TransmatTransfer(event);
+      const t = new Transmat(event);
       t.setData('foo', 123);
       t.setData('bar', {bar: true});
       t.setData('baz', [{baz: 123}]);

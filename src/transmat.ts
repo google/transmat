@@ -24,10 +24,10 @@ import * as mimeType from './mime_type';
 import {addEventListeners} from './utils';
 
 /**
- * TransmatTransfer encapsulates the DataTransfer object and provides some
- * helpers to ease the integration of the drag and copy interactions.
+ * Transmat encapsulates the DataTransfer object and provides some helpers to
+ * ease the integration of the drag and copy interactions.
  */
-export class TransmatTransfer {
+export class Transmat {
   public readonly event: DataTransferEvent;
   public readonly dataTransfer: DataTransfer;
 
@@ -94,45 +94,52 @@ export class TransmatTransfer {
       }
     }
   }
+}
 
-  /**
-   * Sets transmit listeners. Returns a function to remove the event listeners.
-   * Optionally you can change the event types that will be listened to.
-   */
-  static addTransmitListeners(
-    target: EventTarget,
-    listener: (event: DataTransferEvent) => void,
-    options = {dragDrop: true, copyPaste: true}
-  ): () => void {
-    const eventTypes: string[] = [];
+/** Type of listener. */
+export enum TransferEventType {
+  TRANSMIT = 'transmit',
+  RECEIVE = 'receive',
+}
+
+/**
+ * Setup listeners. Returns a function to remove the event listeners.
+ * Optionally you can change the event types that will be listened to.
+ */
+export function addListeners(
+  type: TransferEventType,
+  target: EventTarget,
+  listener: (event: DataTransferEvent) => void,
+  options = {dragDrop: true, copyPaste: true}
+): () => void {
+  // Pick the events to listen to.
+  const eventTypes: string[] = [];
+  if (type === TransferEventType.TRANSMIT) {
     if (options.dragDrop) eventTypes.push('dragstart');
     if (options.copyPaste) eventTypes.push('cut', 'copy');
-    return addEventListeners(target, eventTypes, event => {
-      listener(event as DataTransferEvent);
-
-      // The default behavior of copy and cut needs to be prevented, otherwise
-      // DataTransfer won't work.
-      if (
-        options.copyPaste &&
-        (event.type === 'copy' || event.type === 'cut')
-      ) {
-        event.preventDefault();
-      }
-    });
-  }
-
-  /**
-   * Sets receive listeners. Returns a function to remove the event listeners.
-   * Optionally you can change the event types that will be listened to.
-   */
-  static addReceiveListeners(
-    target: EventTarget,
-    listener: (event: DataTransferEvent) => void,
-    options = {dragDrop: true, copyPaste: true}
-  ): () => void {
-    const eventTypes: string[] = [];
+  } else {
     if (options.dragDrop) eventTypes.push('dragover', 'drop');
     if (options.copyPaste) eventTypes.push('paste');
-    return addEventListeners(target, eventTypes, listener as EventListener);
   }
+  return addEventListeners(target, eventTypes, event => {
+    listener(event as DataTransferEvent);
+
+    // The default behavior of copy and cut needs to be prevented, otherwise
+    // DataTransfer won't work.
+    if (options.copyPaste && (event.type === 'copy' || event.type === 'cut')) {
+      event.preventDefault();
+    }
+  });
 }
+
+/** Sets transmit listeners.  */
+export const addTransmitListeners = addListeners.bind(
+  null,
+  TransferEventType.TRANSMIT
+);
+
+/** Sets receive listeners. */
+export const addReceiveListeners = addListeners.bind(
+  null,
+  TransferEventType.RECEIVE
+);

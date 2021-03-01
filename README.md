@@ -129,9 +129,9 @@ validate before using.
 ## Known quirks
 - Chrome strips newlines in `text/uri-list`. For now, you can only use this to
   transfer a single URI. https://crbug.com/239745
-- Transferring of generated files using `new File()` doesn't seem to be supported
+- Transferring files generated using `new File()` doesn't seem to be supported
   well enough.
-- Webapplications can only read the payload (using
+- Web applications can only read the payload (using
   [getData](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData))
   when finishing the transfer by dropping or pasting. While dragging, only the
   [types](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/types)
