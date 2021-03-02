@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Transmat, addReceiveListeners} from './transmat';
+import {Transmat, addListeners} from './transmat';
 
 describe('Transmat', () => {
   let tester: Element;
@@ -37,7 +37,7 @@ describe('Transmat', () => {
 
     describe('dragover', () => {
       it('calls preventDefault and return false', done => {
-        const unlisten = addReceiveListeners(tester, event => {
+        const unlisten = addListeners(tester, 'receive', event => {
           const transfer = new Transmat(event);
           expect(transfer.accept()).toBeFalse();
           expect(event.defaultPrevented).toBeTrue();

@@ -14,11 +14,5 @@
  * limitations under the License.
  */
 
-export {
-  Transmat,
-  TransferEventType,
-  addListeners,
-  addTransmitListeners,
-  addReceiveListeners,
-} from './transmat';
+export {Transmat, TransferEventType, addListeners} from './transmat';
 export {TransmatObserver} from './transmat_observer';

@@ -15,9 +15,9 @@ providing mime-types keys and their expected data, new integrations can happen,
 sometimes for free.
 
 ```js
-import {Transmat, addTransmitListeners} from 'transmat';
+import {Transmat, addListeners} from 'transmat';
 
-addTransmitListeners(myElement, event => {
+addListeners(myElement, 'transmit', event => {
   const transmat = new Transmat(event);
   transmat.setData({
     'text/plain': 'This will show up in text fields',
@@ -43,7 +43,7 @@ events.
 ```js
 import {Transmat, addReceiveListeners} from 'transmat';
 
-addReceiveListeners(myElement, event => {
+addListeners(myElement, 'receive', event => {
   const myCustomMimeType = 'application/x.my-custom-type';
   const transmat = new Transmat(event);
   if(transmat.hasType(myCustomMimeType) && transmat.accept()) {

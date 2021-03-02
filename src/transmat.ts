@@ -97,24 +97,21 @@ export class Transmat {
 }
 
 /** Type of listener. */
-export enum TransferEventType {
-  TRANSMIT = 'transmit',
-  RECEIVE = 'receive',
-}
+export type TransferEventType = 'transmit' | 'receive';
 
 /**
  * Setup listeners. Returns a function to remove the event listeners.
  * Optionally you can change the event types that will be listened to.
  */
 export function addListeners(
-  type: TransferEventType,
   target: EventTarget,
+  type: TransferEventType,
   listener: (event: DataTransferEvent) => void,
   options = {dragDrop: true, copyPaste: true}
 ): () => void {
   // Pick the events to listen to.
   const eventTypes: string[] = [];
-  if (type === TransferEventType.TRANSMIT) {
+  if (type === 'transmit') {
     if (options.dragDrop) eventTypes.push('dragstart');
     if (options.copyPaste) eventTypes.push('cut', 'copy');
   } else {
@@ -131,15 +128,3 @@ export function addListeners(
     }
   });
 }
-
-/** Sets transmit listeners.  */
-export const addTransmitListeners = addListeners.bind(
-  null,
-  TransferEventType.TRANSMIT
-);
-
-/** Sets receive listeners. */
-export const addReceiveListeners = addListeners.bind(
-  null,
-  TransferEventType.RECEIVE
-);
