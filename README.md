@@ -1,6 +1,5 @@
 # Transmat
-> Transfer data from between webpages, browsers, and applications on the user's
-> device. Transmat will ease the implementation of this native browser feature.
+> Transmat is a library that makes working with the DataTransfer browser API easier.
 
 ![Build status](https://github.com/google/transmat/actions/workflows/node.js.yml/badge.svg)
 
@@ -16,10 +15,10 @@ providing mime-types keys and their expected data, new integrations can happen,
 sometimes for free.
 
 ```js
-import {TransmatTransfer} from 'transmat';
+import {Transmat, addListeners} from 'transmat';
 
-TransmatTransfer.addTransmitListeners(myElement, event => {
-  const transmat = new TransmatTransfer(event);
+addListeners(myElement, 'transmit', event => {
+  const transmat = new Transmat(event);
   transmat.setData({
     'text/plain': 'This will show up in text fields',
     'text/html': '<img src="https://example.com/test.jpg" />',
@@ -42,10 +41,12 @@ You can receive the DataTransfer payload by listening to the `drop` and `paste`
 events.
 
 ```js
-TransmatTransfer.addReceiveListeners(myElement, event => {
+import {Transmat, addReceiveListeners} from 'transmat';
+
+addListeners(myElement, 'receive', event => {
   const myCustomMimeType = 'application/x.my-custom-type';
-  const transmat = new TransmatTransfer(event);
-  if(transmat.hasType(myCustomMimeType) && transmat.acceptTransfer()) {
+  const transmat = new Transmat(event);
+  if(transmat.hasType(myCustomMimeType) && transmat.accept()) {
     const dataString = transmat.getData(myCustomMimeType);
     const data = JSON.parse(dataString);
     console.log(data);
@@ -61,11 +62,11 @@ without friction to any other applications, across the web. How cool is that?
 
 ```js
 import {Person} from 'schema-dts';
-import {TransmatTransfer} from 'transmat';
+import {Transmat} from 'transmat';
 import * as jsonLd from 'transmat/json_ld';
 
 // When transmitting...
-const transmat = new TransmatTransfer(event);
+const transmat = new Transmat(event);
 transmat.setData(jsonLd.MIME_TYPE, jsonLd.fromObject<Person>({
   "@type": "Person",
   "name": "Rory Gilmore",
@@ -92,11 +93,11 @@ You can make use of the included `TransmatObserver` class to respond to drag
 activity. Use this to for example highlight valid drop areas.
 
 ```js
-import {TransmatObserver} from 'transmat';
+import {TransmatObserver, Transmat} from 'transmat';
 
 const obs = new TransmatObserver(entries => {
   for (const entry of entries) {
-    const transmat = new TransmatTransfer(entry.event);
+    const transmat = new Transmat(entry.event);
     if(transmat.hasMimeType(myCustomMimeType)) {
       entry.target.classList.toggle('drag-over', entry.isTarget);
       entry.target.classList.toggle('drag-active', entry.isActive);
@@ -124,17 +125,17 @@ with copy-paste too.
 The data stored in the DataTransfer will be available to any application on the
 user's device. Keep this in mind when transferring sensitive data.
 
-Receiving data should be threated like any any other user input; sanitize and
+Receiving data should be treated like any other user input; sanitize and
 validate before using.
 
 ## Known quirks
 - Chrome strips newlines in `text/uri-list`. For now, you can only use this to
   transfer a single URI. https://crbug.com/239745
-- Transferring of generated files using `new File()` doesn't seem to be supported
+- Transferring files generated using `new File()` doesn't seem to be supported
   well enough.
-- Webapplications can only read the payload (using
+- Web applications can only read the payload (using
   [getData](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData))
-  when finishing the transfer by dropping or pasting. While dragging , only the
+  when finishing the transfer by dropping or pasting. While dragging, only the
   [types](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/types)
   can be read.
 - The DataTransfer data keys are transformed to lowercase.
