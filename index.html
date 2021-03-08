@@ -61,7 +61,7 @@ addListeners(myElement, 'transmit', event => {
   const transmat = new Transmat(event);
   transmat.setData({
     'text/plain': 'Hello world!',
-    'text/html': '<h1>Hello world!</h1>',
+    'text/html': '&lt;h1&gt;Hello world!&lt;/h1&gt;',
     'text/uri-list': 'http://example.com',
     'application/json': {foo:'bar'}
   });
