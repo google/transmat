@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transmat</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Transmat</h1>
+      <p>
+        <strong>Share data beyond the boundaries of the browser.</strong><br />
+        Interact with third-party apps and open up your application to receive external data.
+      </p>
+      <p><a class="button" href="https://GitHub.com/google/transmat">To GitHub repository</a></p>
+    </div>
+  </header>
+
+  <section class="demo">
+    <div class="container">
+      <p class="intro">
+        Move the element below to a new browser window, a text editor or WYSIWYG editor.
+      </p>
+      <div class="targets">
+        <p class="transmitter" tabindex="0" draggable="true">
+          <span>
+            <strong>Drag or copy me!</strong><br />
+            <em>Transfer to a browser, WYSIWYG or text editor.</em>
+          </span>
+        </p>
+        <p class="receiver" tabindex="0">
+          <span>Drop or paste here!</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="readme">
+    <div class="container">
+      <p><strong>Transmat isn't about drag-and-drop</strong>, but about the underlying technique of
+        exchanging data between browser windows and third-party applications. You should be able to
+        use the library along many existing drag-and-drop implementations.</p>
+      <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer">DataTransfer API</a>
+        has the ability to transfer any string typed data to any other application on the user's
+        device. This technique is <a href="https://caniuse.com/mdn-api_datatransfer_setdata">compatible
+        with all modern browsers</a> (everything after IE11). Transmat is a thin wrapper around
+        the DataTransfer API to ease transmitting and receiving data in your web app.</p>
+
+      <h2>Getting started</h2>
+      <ol>
+        <li>
+          Install the repository from NPM.
+          <code class="language-js">npm install transmat</code>
+        </li>
+        <li>
+          Add Transmat to your source node that the user interacts with.
+          <pre><code class="language-js">import {Transmat, addListeners} from 'transmat';
+
+addListeners(myElement, 'transmit', event => {
+  const transmat = new Transmat(event);
+  transmat.setData({
+    'text/plain': 'Hello world!',
+    'text/html': '<h1>Hello world!</h1>',
+    'text/uri-list': 'http://example.com',
+    'application/json': {foo:'bar'}
+  });
+});</code></pre>
+        </li>
+
+        <li>
+          Listen for incoming data.
+          <pre><code class="language-js">import {Transmat, addListeners} from 'transmat';
+
+addListeners(myElement, 'receive', event => {
+  const transmat = new Transmat(event);
+  if (transmat.hasType('application/json') && transmit.accept()) {
+    const payload = transmat.getData('application/json');
+    console.log(JSON.parse(payload));
+  }
+});</code></pre>
+        </li>
+      </ol>
+
+      <h2>Learn more</h2>
+      <p>More documentation and examples at the <a href="https://GitHub.com/google/transmat">GitHub repository</a>.</p>
+    </div>
+  </section>
+
+  <link rel="stylesheet" href="prismjs.css" />
+  <script src="prismjs.js"></script>
+
+  <script type="module" src="demo.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WVGTJBXS6K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-WVGTJBXS6K');
+  </script>
+</body>
+</html>

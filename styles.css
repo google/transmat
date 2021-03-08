@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body {
+  font: 400 1em/1.6 'Poppins', sans-serif;
+  margin: 0;
+  color: #111;
+}
+
+a {
+  color: blue;
+}
+
+/**
+ * At least in Chrome, when an element is set to draggable, user select is
+ * disabled. Re-enable this to allow the user to copy/cut the data.
+ */
+[draggable][tabindex] {
+  user-select: auto;
+  cursor: move;
+}
+
+.container {
+  max-width: 1000px;
+  padding: 1.5em;
+  margin: 0 auto;
+}
+
+.button {
+  display: inline-block;
+  background: #111;
+  border-radius: 8px;
+  color: #fff;
+  padding: .4em 1.5em;
+  cursor: hand;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #000;
+}
+
+header {
+  background: #ffd966;
+}
+
+header strong {
+  font-size: 1.4em;
+}
+
+header a {
+  color: #000;
+  font-weight: bold;
+}
+
+/* Demo */
+.demo .intro {
+  font-size: 1.1em;
+}
+
+.demo .targets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5em;
+}
+
+.demo .transmitter,
+.demo .receiver {
+  flex: 1;
+  border-radius: 8px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .12s;
+  text-align: center;
+}
+
+.demo .targets em {
+  font-size: .8em;
+  font-style: normal;
+  opacity: .8;
+}
+
+.demo .transmitter {
+  cursor: move;
+  border: solid 2px #666;
+}
+
+.demo .transmitter:hover {
+  background: #f0f0f0;
+}
+
+.demo .receiver {
+  border: dashed 2px #999;
+}
+
+.demo .receiver.received {
+  color: green;
+  border-color: green;
+  background: rgba(0, 255, 0, .1);
+}
+
+.demo .receiver.transfer-active {
+  color: black;
+  border-color: black;
+  background: rgba(255,255,255,.5);
+}
+
+.demo .receiver.transfer-hover {
+  color: blue;
+  border-color: blue;
+  background: rgba(0,0,255,.1);
+}
+
+/* Readme */
+.readme {
+  border-top: solid 5px #f5f5f5;
+}
+
+.readme ol li {
+  margin-bottom: 1.5em;
+}
