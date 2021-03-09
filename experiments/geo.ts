@@ -45,7 +45,7 @@ addListeners(container, 'receive', event => {
 
   if ((hasJsonLd || hasGeoJson) && transfer.accept()) {
     if (hasGeoJson) {
-      // Simply arse the receiving Geo JSON data and send to Leaflet.
+      // Simply parse the receiving Geo JSON data and send to Leaflet.
       const geoJson = JSON.parse(transfer.getData(GEO_JSON_MIME_TYPE)!);
       addGeoJson(geoJson);
       return;
