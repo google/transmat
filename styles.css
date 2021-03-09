@@ -61,7 +61,7 @@ header a {
 .demo .targets {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.5em;
+  gap: 0 1.5em;
 }
 
 .demo .transmitter,
