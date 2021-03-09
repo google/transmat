@@ -15,10 +15,10 @@
  */
 
 import {GeoCoordinates, Place} from 'schema-dts';
-import {TransmatTransfer} from '../src';
+import {Transmat, addListeners} from '../src';
 import * as jsonLd from '../src/json_ld';
 
-const container = document.querySelector<HTMLElement>('.map');
+const container = document.querySelector<HTMLElement>('.map')!;
 
 // Simple LeafLet instance.
 const L = window.L;
@@ -38,24 +38,24 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const GEO_JSON_MIME_TYPE = 'application/geo+json';
 
 // Receive at the map.
-TransmatTransfer.addReceiveListeners(container, event => {
-  const transfer = new TransmatTransfer(event);
+addListeners(container, 'receive', event => {
+  const transfer = new Transmat(event);
   const hasJsonLd = transfer.hasType(jsonLd.MIME_TYPE);
   const hasGeoJson = transfer.hasType(GEO_JSON_MIME_TYPE);
 
-  if ((hasJsonLd || hasGeoJson) && transfer.acceptTransfer()) {
+  if ((hasJsonLd || hasGeoJson) && transfer.accept()) {
     if (hasGeoJson) {
       // Simply arse the receiving Geo JSON data and send to Leaflet.
-      const geoJson = JSON.parse(transfer.getData(GEO_JSON_MIME_TYPE));
+      const geoJson = JSON.parse(transfer.getData(GEO_JSON_MIME_TYPE)!);
       addGeoJson(geoJson);
       return;
     }
 
     if (hasJsonLd) {
-      const data = jsonLd.parse(transfer.getData(jsonLd.MIME_TYPE));
+      const data = jsonLd.parse(transfer.getData(jsonLd.MIME_TYPE)!);
       const features = jsonLd
         // Find all GeoCoordinates in the JSON-LD payload.
-        .findAllOfType<GeoCoordinates>(data, 'GeoCoordinates')
+        .getAllByType<GeoCoordinates>(data, 'GeoCoordinates')
         .filter(gc => gc.latitude && gc.longitude)
         // Map the GeoCoordinates to a GeoJson feature.
         .map(gc => {
@@ -87,10 +87,11 @@ function addGeoJson(data: GeoJSON.GeoJSON) {
 
 // Example transmit sources.
 
-TransmatTransfer.addTransmitListeners(
-  document.querySelector('.sources .json-ld'),
+addListeners(
+  document.querySelector('.sources .json-ld')!,
+  'transmit',
   event => {
-    const transfer = new TransmatTransfer(event);
+    const transfer = new Transmat(event);
     const data = jsonLd.fromObject<Place>({
       '@type': 'Place',
       geo: {
@@ -104,21 +105,17 @@ TransmatTransfer.addTransmitListeners(
   }
 );
 
-TransmatTransfer.addTransmitListeners(
-  document.querySelector('.sources .geo-json'),
+addListeners(
+  document.querySelector('.sources .geo-json')!,
+  'transmit',
   event => {
-    const transfer = new TransmatTransfer(event);
-    const geoJsonString = JSON.stringify({
+    const transfer = new Transmat(event);
+    transfer.setData(GEO_JSON_MIME_TYPE, {
       type: 'Feature',
-      properties: {
-        name: 'GelreDome',
-        popupContent: 'This is where the Vitesse plays!',
-      },
       geometry: {
         type: 'Point',
         coordinates: [5.89287, 51.96275],
       },
     });
-    transfer.setData(GEO_JSON_MIME_TYPE, geoJsonString);
   }
 );

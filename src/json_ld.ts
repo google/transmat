@@ -14,12 +14,18 @@
  * limitations under the License.
  */
 
-import {Thing, WithContext, DataType, PronounceableText} from 'schema-dts';
+import {Thing, DataType, PronounceableText} from 'schema-dts';
 
 export type SchemaValue<T> = T | ReadonlyArray<T>;
 export type ScalarDataType = string | number | boolean | null;
 
-// Same as WithContext, adds a @type key typing to the object.
+export declare type ThingType<T = Thing> = Exclude<T, string>;
+
+export declare type WithContext<T extends ThingType> = T & {
+  '@context': 'https://schema.org';
+};
+
+/** Same as WithContext, adds a @type key typing to the object. */
 export declare type WithType<T> = T & {'@type': SchemaValue<string>};
 
 /** Mime type for JSON-LD data. */
@@ -28,37 +34,30 @@ export const MIME_TYPE = 'application/ld+json';
 /** Parses the input to an object. */
 export function parse<T extends Thing>(
   data: string
-): WithContext<T> | undefined {
+): WithContext<ThingType<T>> {
   return JSON.parse(data, (key, value) => {
     switch (value) {
-      case 'True':
       case 'https://schema.org/True':
         return true;
-
-      case 'False':
       case 'https://schema.org/False':
         return false;
-
       default:
         return value;
     }
-  }) as WithContext<T>;
+  }) as WithContext<ThingType<T>>;
 }
 
-/**
- * Sets the given object as JsonLdData, and returns the generated entry. By
- * default, the data will be marked as a https://schema.org/Thing.
- */
+/** Sets the given object as JsonLdData, and returns the generated entry. */
 export function fromObject<T extends Thing>(
-  data: Partial<WithContext<T>>
-): WithContext<T> {
-  return Object.assign(
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Thing',
-    },
-    data
-  ) as WithContext<T>;
+  data: Partial<T>
+): WithContext<ThingType<T>> {
+  if (typeof data === 'string') {
+    throw new Error('Only objects are supported.');
+  }
+  return {
+    '@context': 'https://schema.org',
+    ...(data as ThingType<T>),
+  } as WithContext<ThingType<T>>;
 }
 
 /**
@@ -69,7 +68,7 @@ export function getValue(
   input: SchemaValue<DataType> | undefined
 ): ScalarDataType | undefined {
   const value = Array.isArray(input) ? input[0] : input;
-  const pronounceableText = findOneOfType<Exclude<PronounceableText, string>>(
+  const pronounceableText = getByType<Exclude<PronounceableText, string>>(
     value,
     'PronounceableText'
   );
@@ -97,7 +96,8 @@ export function getValues(
 /** Traverse an object multiple values. */
 export function findAll<T>(
   data: {},
-  matcher: (node: T | unknown) => boolean,
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
+  matcher: (node: T | any) => boolean,
   limit = 0,
   results: T[] = []
 ): ReadonlyArray<T> {
@@ -115,24 +115,27 @@ export function findAll<T>(
   return results;
 }
 
-/** Find a single value. */
-export function findOne<T>(
+/** Find a single value that matches the matcher. */
+export function find<T>(
   data: {},
-  matcher: (node: T | unknown) => boolean
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
+  matcher: (node: T | any) => boolean
 ): T | undefined {
   return findAll<T>(data, matcher, 1)[0];
 }
 
-export function findAllOfType<T>(
+/** Find all objects that match the given type. */
+export function getAllByType<T>(
   data: {},
   type: string,
   limit = 0
-): ReadonlyArray<T> {
-  return findAll<T>(data, obj => isType(obj, type), limit);
+): ReadonlyArray<ThingType<T>> {
+  return findAll<ThingType<T>>(data, obj => isType(obj, type), limit);
 }
 
-export function findOneOfType<T>(data: {}, type: string): T | undefined {
-  return findAllOfType<T>(data, type, 1)[0];
+/** Find the first object that matches the given type. */
+export function getByType<T>(data: {}, type: string): ThingType<T> | undefined {
+  return getAllByType<T>(data, type, 1)[0];
 }
 
 /** Whether the input object is of the given type. */
