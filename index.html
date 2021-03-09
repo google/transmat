@@ -58,8 +58,14 @@
           Install the library from <a href="https://npmjs.com/transmat">NPM</a>.
           <pre class="language-js"><code>npm install transmat</code></pre>
         </li>
-        <li>
-          Add Transmat to your source node that the user interacts with.
+        <li>Add a draggable and focusable element to your webpage.
+          <pre class="language-html"><code>&lt;div id="myElement" draggable="true" tabindex="0"&gt;
+  Transmitter and receiver
+&lt;/div&gt;</code></pre>
+
+        </li>
+        <li><strong>Listen for transmit events on the element.</strong><br />
+            Create a new Transmat instance for the event, and provide a object with mime-type / data.
           <pre class="language-js"><code>import {Transmat, addListeners} from 'transmat';
 
 addListeners(myElement, 'transmit', event => {
@@ -74,7 +80,8 @@ addListeners(myElement, 'transmit', event => {
         </li>
 
         <li>
-          Listen for incoming data.
+          <strong>Listen for receiving events on the element.</strong><br />
+          Create a Transmat instance for the event, and, in this case, only accept application/json payload.
           <pre class="language-js"><code>import {Transmat, addListeners} from 'transmat';
 
 addListeners(myElement, 'receive', event => {
@@ -86,6 +93,8 @@ addListeners(myElement, 'receive', event => {
 });</code></pre>
         </li>
       </ol>
+
+      <h2>Connecting the web, with JSON-LD</h2>
 
       <h2>Learn more</h2>
       <p>More documentation and examples at the <a href="https://GitHub.com/google/transmat">GitHub repository</a>.</p>
