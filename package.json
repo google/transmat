@@ -14,6 +14,7 @@
   "devDependencies": {
     "@snowpack/plugin-typescript": "^1.2.1",
     "@types/jasmine": "^3.6.4",
+    "@types/leaflet": "^1.5.23",
     "@types/node": "^14.11.2",
     "gts": "^3.1.0",
     "jasmine": "^3.6.4",
