@@ -7,18 +7,17 @@ import { default as jsonLd } from "https://cdn.skypack.dev/transmat@0.0.1/dist/j
 
 addListeners(document.querySelector(".transmitter"), "transmit", (event) => {
   const data = {
-    "@type": "Person",
-    name: "Rory Gilmore",
-    image:
-      "https://upload.wikimedia.org/wikipedia/en/8/8f/Rory_Gilmore_season_1.jpg",
-    url: "https://www.imdb.com/title/tt0238784/",
+    "@type": "TVSeries",
+    name: "Doctor Who",
+    image: "https://upload.wikimedia.org/wikipedia/commons/2/23/DW_4.jpg",
+    url: "https://en.wikipedia.org/wiki/Doctor_Who",
   };
 
   const transfer = new Transmat(event);
   transfer.setData({
     "text/uri-list": data.url,
     "text/plain": `${data.name}`,
-    "text/html": `<h2>${data.name}</h2><img src="${data.image}" alt="logo" />`,
+    "text/html": `<a href="${data.url}"><img src="${data.image}" alt="${data.name}" /></a>`,
     [jsonLd.MIME_TYPE]: jsonLd.fromObject(data),
   });
 });

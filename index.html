@@ -20,13 +20,13 @@
   <section class="demo">
     <div class="container">
       <p class="intro">
-        Move the element below to a new browser window, a text editor or WYSIWYG editor.
+        Drag the element below to a new browser window, a text editor or WYSIWYG editor.
       </p>
       <div class="targets">
         <p class="transmitter" tabindex="0" draggable="true">
           <span>
             <strong>Drag or copy me!</strong><br />
-            <em>Transfer to a browser, WYSIWYG or text editor.</em>
+            <em>Containing HTML, Text, URL and JSON data.</em>
           </span>
         </p>
         <p class="receiver" tabindex="0">
@@ -44,7 +44,7 @@
         exchanging data between browser windows and third-party applications. You should be able to
         use the library along many existing drag-and-drop implementations.</p>
       <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer">DataTransfer API</a>
-        has the ability to transfer multiple string typed data payloads to any other application on the user's
+        has the ability to transfer multiple string data payloads to any other application on the user's
         device. This technique is <a href="https://caniuse.com/mdn-api_datatransfer_setdata">compatible
         with all modern browsers</a> (everything after IE11). Transmat is a thin wrapper around
         the DataTransfer API to ease transmitting and receiving data in your web app.</p>
@@ -52,8 +52,8 @@
       <h2>Getting started</h2>
       <ol>
         <li>
-          Install the library from NPM.
-          <code class="language-js">npm install transmat</code>
+          Install the library from <a href="https://npmjs.com/transmat">NPM</a>.
+          <pre><code class="language-js">npm install transmat</code></pre>
         </li>
         <li>
           Add Transmat to your source node that the user interacts with.
