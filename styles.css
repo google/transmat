@@ -118,6 +118,14 @@ header a {
   border-top: solid 5px #f5f5f5;
 }
 
+.readme img.payloads {
+  float: right;
+  margin: .6em 0 .6em 1em;
+  width: 300px;
+  max-width: 40%;
+  order: 2;
+}
+
 .readme ol li {
   margin-bottom: 1.5em;
 }
