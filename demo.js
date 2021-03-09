@@ -55,3 +55,18 @@ const observer = new TransmatObserver((entries) => {
   entry.target.classList.toggle("transfer-hover", entry.isTarget);
 });
 observer.observe(document.querySelector(".receiver"));
+
+for (const el of document.querySelectorAll(".demo .intro a")) {
+  el.addEventListener("click", (ev) => {
+    const width = Math.min(1200, screen.width);
+    const height = Math.min(900, screen.height);
+    const left = Math.round((screen.width - width) / 2);
+    const top = Math.round((screen.height - height) / 2);
+    window.open(
+      ev.target.href,
+      "",
+      `menubar=1,toolbar=1,width=${width},height=${height},left=${left},top=${top}`
+    );
+    ev.preventDefault();
+  });
+}
