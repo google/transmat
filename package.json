@@ -1,13 +1,15 @@
 {
   "name": "transmat",
   "version": "0.0.1",
-  "description": "",
-  "main": "build/src/index.js",
-  "types": "build/src/index.d.ts",
+  "description": "User interaction across applications using the DataTransfer API",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "build/src"
+    "dist/**/*"
   ],
-  "author": "Google Inc. - Jorik Tangelder",
+  "repository": "github:google/transmat",
+  "bugs": "https://github.com/google/transmat/issues",
+  "author": "Jorik Tangelder <jorik@google.com>",
   "license": "Apache-2.0",
   "devDependencies": {
     "@snowpack/plugin-typescript": "^1.2.1",
@@ -29,12 +31,13 @@
     "dev": "snowpack dev",
     "test": "karma start karma.conf.js",
     "lint": "gts lint experiments/ src/",
-    "clean": "gts clean experiments/ src/",
-    "compile": "tsc -p .",
+    "clean": "gts clean experiments/ src/ && rm -rf ./coverage",
+    "compile": "tsc",
     "fix": "gts fix experiments/ src/",
     "license": "$GOPATH/bin/addlicense -c \"Google LLC\" -l apache ./src ./experiments",
     "license-check": "jsgl --local .",
-    "prepare": "npm run compile"
+    "prepare": "npm run compile",
+    "prepublish": "npm run license-check && npm run lint && npm run clean && npm run compile"
   },
   "dependencies": {
     "schema-dts": "^0.8.2"
