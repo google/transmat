@@ -17,6 +17,11 @@ a {
   color: blue;
 }
 
+hr {
+  margin: 2em 0;
+  border: solid 5px #f5f5f5;
+}
+
 /**
  * At least in Chrome, when an element is set to draggable, user select is
  * disabled. Re-enable this to allow the user to copy/cut the data.
