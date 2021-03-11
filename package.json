@@ -8,6 +8,7 @@
     "dist/**/*"
   ],
   "repository": "github:google/transmat",
+  "homepage": "https://google.github.io/transmat",
   "bugs": "https://github.com/google/transmat/issues",
   "author": "Jorik Tangelder <jorik@google.com>",
   "license": "Apache-2.0",
