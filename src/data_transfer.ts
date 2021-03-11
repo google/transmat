@@ -41,3 +41,49 @@ export function normalizeType(input: string) {
   // by returning text/plain.
   return result === 'text' ? 'text/plain' : result;
 }
+
+/**
+ * Sets a minimal drag image that will replace the default, but still give the
+ * user the feeling of dragging an object when moving beyond the boundaries of
+ * the browser.
+ * An use-case for the minimal image is when using Transmat in combination with
+ * existing drag-drop implementations.
+ */
+export function setMinimalDragImage(
+  transfer: DataTransfer,
+  width = 22,
+  height = 18,
+  square = 2,
+  border = 4,
+  colorA = 'rgba(255,255,255,.5)',
+  colorB = 'rgba(0,0,0,.5)'
+): void {
+  // Render 2x size to optimize for HD screens, and scale down with CSS.
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+
+  // Draw a checkered border.
+  const ctx = canvas.getContext('2d');
+  for (let x = 0; x < width / square; x++) {
+    for (let y = 0; y < height / square; y++) {
+      ctx.fillStyle = (x + y) % 2 ? colorA : colorB;
+      ctx.fillRect(x * square, y * square, square, square);
+    }
+  }
+  ctx.clearRect(border, border, width - border * 2, height - border * 2);
+
+  // Chrome needs the dragImages to be appended to the DOM. Add it to the DOM
+  // for short period and put it outside the viewport.
+  Object.assign(canvas.style, {
+    width: `${width}px`,
+    height: `${height}}px`,
+    position: 'absolute',
+    left: '-999px',
+  });
+  document.body.appendChild(canvas);
+  transfer.setDragImage(canvas, width / 2, height / 2);
+  setTimeout(() => {
+    canvas.remove();
+  });
+}
