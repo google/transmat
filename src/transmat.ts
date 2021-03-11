@@ -102,28 +102,42 @@ export type TransferEventType = 'transmit' | 'receive';
  * Setup listeners. Returns a function to remove the event listeners.
  * Optionally you can change the event types that will be listened to.
  */
-export function addListeners(
-  target: EventTarget,
+export function addListeners<T extends Node>(
+  target: T,
   type: TransferEventType,
-  listener: (event: DataTransferEvent) => void,
+  listener: (event: DataTransferEvent, target: T) => void,
   options = {dragDrop: true, copyPaste: true}
 ): () => void {
-  // Pick the events to listen to.
-  const eventTypes: string[] = [];
-  if (type === 'transmit') {
-    if (options.dragDrop) eventTypes.push('dragstart');
-    if (options.copyPaste) eventTypes.push('cut', 'copy');
-  } else {
-    if (options.dragDrop) eventTypes.push('dragover', 'drop');
-    if (options.copyPaste) eventTypes.push('paste');
-  }
-  return addEventListeners(target, eventTypes, event => {
-    listener(event as DataTransferEvent);
+  const isTransmitEvent = type === 'transmit';
+  let unlistenCopyPaste: undefined | (() => void);
+  let unlistenDragDrop: undefined | (() => void);
 
-    // The default behavior of copy and cut needs to be prevented, otherwise
-    // DataTransfer won't work.
-    if (options.copyPaste && (event.type === 'copy' || event.type === 'cut')) {
-      event.preventDefault();
-    }
-  });
+  if (options.copyPaste) {
+    const events = isTransmitEvent ? ['cut', 'copy'] : ['paste'];
+    const parentElement = target.parentElement!;
+    unlistenCopyPaste = addEventListeners(parentElement, events, event => {
+      if (!target.contains(document.activeElement)) {
+        return;
+      }
+      listener(event as DataTransferEvent, target);
+
+      // The default behavior of copy and cut needs to be prevented, otherwise
+      // DataTransfer won't work.
+      if (event.type === 'copy' || event.type === 'cut') {
+        event.preventDefault();
+      }
+    });
+  }
+
+  if (options.dragDrop) {
+    const events = isTransmitEvent ? ['dragstart'] : ['dragover', 'drop'];
+    unlistenDragDrop = addEventListeners(target, events, event => {
+      listener(event as DataTransferEvent, target);
+    });
+  }
+
+  return () => {
+    unlistenCopyPaste && unlistenCopyPaste();
+    unlistenDragDrop && unlistenDragDrop();
+  };
 }
