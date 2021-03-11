@@ -64,7 +64,7 @@ export function setMinimalDragImage(
   canvas.height = height;
 
   // Draw a checkered border.
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d')!;
   for (let x = 0; x < width / square; x++) {
     for (let y = 0; y < height / square; y++) {
       ctx.fillStyle = (x + y) % 2 ? colorA : colorB;
