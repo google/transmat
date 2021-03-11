@@ -49,7 +49,6 @@ export class Transmat {
     }
     if (this.event.type === 'drop') {
       // Prevent some browsers from redirecting.
-      this.event.stopPropagation();
       this.event.preventDefault();
     }
     return this.event.type === 'drop' || this.event.type === 'paste';
