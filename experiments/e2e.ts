@@ -18,8 +18,8 @@ import {Person, School} from 'schema-dts';
 import {Transmat, TransmatObserver, addListeners} from '../src';
 import * as jsonLd from '../src/json_ld';
 
-const transmitEl = document.querySelector('.transmitter')!;
-const receiveEl = document.querySelector('.receiver')!;
+const transmitEl = document.querySelector<HTMLElement>('.transmitter')!;
+const receiveEl = document.querySelector<HTMLElement>('.receiver')!;
 
 addListeners(transmitEl, 'transmit', event => {
   const transfer = new Transmat(event);
@@ -34,13 +34,13 @@ addListeners(transmitEl, 'transmit', event => {
   transfer.setData(jsonLd.MIME_TYPE, data);
 });
 
-addListeners(receiveEl, 'receive', event => {
+addListeners(receiveEl, 'receive', (event, target) => {
   const transfer = new Transmat(event);
   if (transfer.hasType(jsonLd.MIME_TYPE) && transfer.accept()) {
     const person = jsonLd.parse<Person>(transfer.getData(jsonLd.MIME_TYPE)!);
     const school = jsonLd.getByType<School>(person, 'School')!;
     const message = `Hi ${person.name} from ${jsonLd.getValue(school.name)}`;
-    (event.target as HTMLElement).innerText = message;
+    target.innerText = message;
   }
 });
 

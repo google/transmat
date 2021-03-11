@@ -21,14 +21,6 @@ body {
   margin: 5vh 5vw;
 }
 
-/**
- * At least in Chrome, when an element is set to draggable, user select is
- * disabled. Re-enable this to allow the user to copy/cut the data.
- */
-[draggable][tabindex] {
-  user-select: auto;
-}
-
 [draggable] {
   cursor: move;
 }
