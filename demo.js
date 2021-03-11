@@ -2,8 +2,8 @@ import {
   Transmat,
   TransmatObserver,
   addListeners,
-} from "https://cdn.skypack.dev/transmat@0.0.1";
-import { default as jsonLd } from "https://cdn.skypack.dev/transmat@0.0.1/dist/json_ld.js";
+} from "https://cdn.skypack.dev/transmat@0.1.0";
+import { default as jsonLd } from "https://cdn.skypack.dev/transmat@0.1.0/dist/json_ld.js";
 
 addListeners(document.querySelector(".transmitter"), "transmit", (event) => {
   const data = {
