@@ -109,8 +109,8 @@ export function addListeners<T extends Node>(
   options = {dragDrop: true, copyPaste: true}
 ): () => void {
   const isTransmitEvent = type === 'transmit';
-  let unlistenCopyPaste: undefined | (() => {});
-  let unlistenDragDrop: undefined | (() => {});
+  let unlistenCopyPaste: undefined | (() => void);
+  let unlistenDragDrop: undefined | (() => void);
 
   if (options.copyPaste) {
     const events = isTransmitEvent ? ['cut', 'copy'] : ['paste'];
