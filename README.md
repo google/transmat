@@ -127,7 +127,9 @@ with copy-paste too.
 
 ### Security and privacy
 The data stored in the DataTransfer will be available to any application on the
-user's device. Keep this in mind when transferring sensitive data.
+user's device. Keep this in mind when transferring sensitive data. Web 
+applications can only read the data payload on drop. While dragging, only the keys 
+(mime-types) are exposed to the webpage that is being dragged over.
 
 Receiving data should be treated like any other user input; sanitize and
 validate before using.
