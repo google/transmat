@@ -36,10 +36,14 @@ export function normalizeType(input: string) {
   // Browsers (at least Chrome) seem to lowercase the type. Enforce this to be
   // consistent across browsers.
   const result = input.toLowerCase();
-
-  // IE and Opera return 'Text' when the type is 'text/plain'. Fix this quirk
-  // by returning text/plain.
-  return result === 'text' ? 'text/plain' : result;
+  switch (result) {
+    case 'text':
+      return 'text/plain';
+    case 'url':
+      return 'text/uri-list';
+    default:
+      return result;
+  }
 }
 
 /**
