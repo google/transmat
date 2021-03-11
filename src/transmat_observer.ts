@@ -40,6 +40,7 @@ export type TransmatObserverCallback = (
 export class TransmatObserver {
   private readonly targets = new Set<Element>();
   private prevRecords: ReadonlyArray<TransmatObserverEntry> = [];
+  private removeEventListeners = () => {};
 
   constructor(private readonly callback: TransmatObserverCallback) {}
 
@@ -54,11 +55,12 @@ export class TransmatObserver {
           event.target === document.body.parentElement);
 
       // Whether there is a drag happening on the page.
-      const isActive = event.type !== 'dragend' && !isLeavingDrag;
+      const isActive =
+        event.type !== 'drop' && event.type !== 'dragend' && !isLeavingDrag;
 
       // Whether the target is being dragged over.
       const isTargetNode = target.contains(event.target as Node);
-      const isTarget = isTargetNode && event.type === 'dragover';
+      const isTarget = isActive && isTargetNode && event.type === 'dragover';
 
       records.push({
         target,
@@ -77,14 +79,12 @@ export class TransmatObserver {
 
   private addEventListeners() {
     const listener = this.onTransferEvent as EventListener;
-    addEventListeners(document, ['dragover', 'dragend'], listener);
-    document.addEventListener('dragleave', listener, true);
-  }
-
-  private removeEventListeners() {
-    const listener = this.onTransferEvent as EventListener;
-    removeEventListeners(document, ['dragover', 'dragend'], listener);
-    document.removeEventListener('dragleave', listener, true);
+    this.removeEventListeners = addEventListeners(
+      document,
+      ['dragover', 'dragend', 'dragleave', 'drop'],
+      listener,
+      true
+    );
   }
 
   /** Returns the most recent emitted records. */
