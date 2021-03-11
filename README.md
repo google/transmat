@@ -1,13 +1,17 @@
 # Transmat
-> Transmat is a library that makes working with the DataTransfer browser API easier.
+> Share data beyond the boundaries of the browser.
 
 ![Build status](https://github.com/google/transmat/actions/workflows/node.js.yml/badge.svg)
 
-## How does this work?
 By utilizing the [DataTransfer API](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer)
-capabilities to transfer data between any application on the user's device. This
-technique is [compatible](https://caniuse.com/mdn-api_datatransfer_setdata) with
-many browsers across devices.
+capabilities to transfer data to applications, Transmat is enabling your web app
+to interact beyond the boundaries of the browser. This technique is
+[compatible](https://caniuse.com/mdn-api_datatransfer_setdata) all modern
+desktop browsers since IE11.
+
+Transmat will help you setting up the necessarily drag-drop and copy-paste
+interactions, and help you in transferring (both transmitting and receiving) the
+data.
 
 ### Transmitting data
 The DataTransfer payload consists of simple string-based key value pairs. When
@@ -139,6 +143,8 @@ validate before using.
   [types](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/types)
   can be read.
 - The DataTransfer data keys are transformed to lowercase.
+- Mobile devices have poor support. iOS ignores DataTransfer, Chrome on Android
+  only supports `text/plain`.
 
 ## Contact
 Use GitHub issues for filing bugs. Follow
