@@ -15,7 +15,7 @@
  */
 
 import {DataTransferEvent} from './data_transfer';
-import {addEventListeners, removeEventListeners} from './utils';
+import {addEventListeners} from './utils';
 
 /** Entries that will be emitted by the TransmatObserver. */
 export interface TransmatObserverEntry {
