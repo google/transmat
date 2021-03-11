@@ -1,6 +1,6 @@
 {
   "name": "transmat",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "User interaction across applications using the DataTransfer API",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -8,6 +8,7 @@
     "dist/**/*"
   ],
   "repository": "github:google/transmat",
+  "homepage": "https://google.github.io/transmat",
   "bugs": "https://github.com/google/transmat/issues",
   "author": "Jorik Tangelder <jorik@google.com>",
   "license": "Apache-2.0",
