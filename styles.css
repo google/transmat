@@ -19,6 +19,7 @@ a {
 
 hr {
   margin: 2em 0;
+  height: 0;
   border: solid 5px #f5f5f5;
 }
 
@@ -64,6 +65,43 @@ header a {
   color: #000;
   font-weight: bold;
 }
+
+@media screen and (max-width: 639px) {
+  header .intro-animation {
+    max-width: 350px;
+    margin: 1em auto;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  header .container {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    grid-auto-rows: 1fr;
+    gap: 0 1.5em;
+    align-items: center;
+  }
+}
+
+/* Readme */
+.readme img.payloads {
+  float: right;
+  margin: 0 0 .6em 1em;
+  width: 250px;
+  max-width: 40%;
+}
+
+.readme img.json-ld-logo {
+  float: right;
+  margin: 0 0 0 1em;
+  width: 200px;
+  max-width: 30%;
+}
+
+.readme ol li {
+  margin-bottom: 1.5em;
+}
+
 
 /* Demo */
 .demo .intro {
@@ -126,28 +164,211 @@ header a {
   background: rgba(0, 255, 0, .1);
 }
 
-/* Readme */
-.readme {
-  border-top: solid 5px #f5f5f5;
+
+/** Animation */
+.browser {
+  line-height: 1;
+  border-radius: 8px;
+  border: solid 1px #000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #ffd966;
 }
 
-.readme img.payloads {
-  float: right;
-  margin: .6em 0 .6em 1em;
-  width: 300px;
-  max-width: 40%;
+.browser .controls {
+  padding: 4px 16px;
+  text-align: right;
+  flex: none;
+  border-bottom: solid 1px #000;
 }
 
-.readme img.json-ld-logo {
-  float: right;
-  margin: 0 0 0 1em;
-  width: 200px;
-  max-width: 30%;
+.browser .controls span {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  overflow: hidden;
+  margin-left: 4px;
+  background: red;
+  border-radius: 100%;
 }
 
-.readme ol li {
-  margin-bottom: 1.5em;
+.browser .controls .c1 { background: #6eb54b; }
+.browser .controls .c2 { background: #dfac52; }
+.browser .controls .c3 { background: #d8665d; }
+
+.browser .viewport {
+  background: #ffd966;
+  overflow: auto;
+  flex: 1;
 }
+
+.animation {
+  flex: none;
+  position: relative;
+  width: 100%;
+  padding-bottom: 60%;
+  margin: 0 auto;
+  --duration: 3s;
+  --easing: ease-in-out;
+}
+
+.animation .b1,
+.animation .b2 {
+  width: 60%;
+  height: 70%;
+}
+
+.animation .b1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  animation: drag-browser-1 var(--duration) var(--easing) infinite;
+}
+
+.animation .b2 {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  animation: drag-browser-2 var(--duration) var(--easing) infinite;
+}
+
+.animation .viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animation .drag {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  transform: translateY(12px);
+  left: 0;
+  width: 60%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: drag  var(--duration) var(--easing) infinite;
+}
+
+.animation .drag .source {
+  flex: none;
+  padding: 10px;
+  font: 1em Helvetica, Arial, sans-serif;
+  background: #fff;
+  border: solid 2px #000;
+  border-radius: 8px;
+  position: relative;
+  height: 25%;
+  width: 36%;
+  animation: drag-source var(--duration) infinite;
+}
+
+.animation .drag .cursor {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 100%;
+  z-index: 10;
+  animation: drag-cursor var(--duration) var(--easing) infinite;
+  transform: translate(-17px, -10px);
+  content: url(openhand.png);
+  width: 35px;
+  height: 35px;
+}
+
+@keyframes drag {
+  from, 20% {
+    left: 0%;
+    top: 0%;
+  }
+
+  36% {
+    top: 20%;
+  }
+
+  55%, to {
+    left: 40%;
+    top: 30%;
+  }
+
+  from { opacity: 0; }
+  5% { opacity: 1; }
+  90% { opacity: 1; }
+  95%, to { opacity: 0;}
+}
+
+@keyframes drag-browser-1 {
+  from, 45% { box-shadow: 0 3px 8px rgba(0,0,0,.1); }
+  46%, to { box-shadow: none; }
+}
+
+@keyframes drag-browser-2 {
+  from, 45% {
+    z-index: 1;
+    box-shadow: none;
+  }
+  46%, to {
+    z-index: 2;
+    box-shadow: 0 3px 8px rgba(0,0,0,.1);
+  }
+}
+
+@keyframes drag-cursor {
+  from {
+    opacity: 0;
+    left: 30%;
+    top: 60%;
+  }
+
+  20% {
+    opacity: 1;
+    left: 50%;
+    top: 50%;
+  }
+
+  56% { opacity: 1; }
+  57%, to { opacity: 0; }
+
+  from, 20%{
+    content: url(openhand.png);
+  }
+  21%, 56%, to {
+    content: url(closedhand.png);
+  }
+}
+
+@keyframes drag-source {
+  0%, 64% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  from, 19%, 57%, to { box-shadow: none;}
+  20%, 56% { box-shadow: 0 3px 15px rgba(0,0,0,.2); }
+
+  67% {
+    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  }
+
+  70%, 78% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+
+  74%, 82% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+
+  85%, 100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
+
 
 /** PrismJS syntax highlighting. */
 code[class*="language-"],

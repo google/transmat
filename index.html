@@ -10,49 +10,82 @@
 <body>
   <header>
     <div class="container">
-      <h1>Transmat</h1>
-      <p>
-        <strong>Share data beyond the boundaries of the browser.</strong><br />
-        Interact with third-party apps and open up your application to receive external data.
-      </p>
-      <p><a class="button" href="https://GitHub.com/google/transmat">View on GitHub</a></p>
-    </div>
-  </header>
+      <div class="intro">
+        <h1>Transmat</h1>
+        <p>
+          <strong>Share data beyond the browser boundaries</strong><br />
+          Interact with third-party apps and open up your application to receive external data.
+        </p>
+        <p><a class="button" href="https://GitHub.com/google/transmat">View on GitHub</a></p>
+      </div>
+      <div class="intro-animation">
+        <div class="animation">
+          <div class="browser b1">
+            <div class="controls">
+              <span class="c1"></span>
+              <span class="c2"></span>
+              <span class="c3"></span>
+            </div>
+            <div class="viewport">
+            </div>
+          </div>
 
-  <section class="demo">
-    <div class="container">
-      <p class="intro">
-        Drag the element below to a new
-        <a href="https://google.github.io/transmat" target="_blank">browser window</a>,
-        a <a href="https://codepen.io/pen" target="_blank">text editor</a> or
-        <a href="https://doc.new" target="_blank">WYSIWYG editor</a>.
-      </p>
-      <div class="targets">
-        <p class="transmitter" tabindex="0" draggable="true">
-          <span>
-            <strong>Drag or copy me!</strong><br />
-            <em>Containing HTML, Text, URL and JSON data.</em>
-          </span>
-        </p>
-        <p class="receiver" tabindex="0">
-          <span>Drop or paste here!</span>
-        </p>
+          <div class="browser b2">
+            <div class="controls">
+              <span class="c1"></span>
+              <span class="c2"></span>
+              <span class="c3"></span>
+            </div>
+            <div class="viewport">
+            </div>
+          </div>
+
+          <div class="drag">
+            <div class="cursor"></div>
+            <div class="source"></div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </header>
 
   <section class="readme">
     <div class="container">
       <p>
         <img class="payloads" src="payloads.png" alt="Multiple payloads in a single transmit" />
-        <strong>Transmat isn't about drag-and-drop</strong>, but about the underlying technique of
-        exchanging data between browser windows and third-party applications. You should be able to
-        use the library along many existing drag-and-drop implementations.</p>
-      <p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer">DataTransfer API</a>
-        has the ability to transfer multiple string data payloads to any other application on the user's
-        device. This technique is <a href="https://caniuse.com/mdn-api_datatransfer_setdata">compatible
-        with all modern desktop browsers</a> (everything after IE11). Transmat is a thin wrapper around
-        the DataTransfer API to ease transmitting and receiving data in your web app.</p>
+        <strong>Transmat isn't about drag-and-drop, but about sharing data between applications on the web.</strong>
+        Transmat is a small library around the
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer">DataTransfer API</a>
+        that eases transmitting and receiving data in your web app using drag-drop and copy-paste
+        interactions.</p>
+      <p>The DataTransfer API has the ability to transfer multiple string data payloads to any other
+        application on the user's device. This technique is
+        <a href="https://caniuse.com/mdn-api_datatransfer_setdata">compatible with all modern desktop
+          browsers</a> (everything after IE11) and can be used today.</p>
+
+      <hr />
+
+      <div class="demo">
+        <p class="intro">
+          <strong>Drag or copy the element below</strong> to a new
+          <a href="https://google.github.io/transmat" target="_blank">browser window</a>,
+          a <a href="https://codepen.io/pen" target="_blank">text editor</a> or
+          <a href="https://doc.new" target="_blank">WYSIWYG editor</a>.
+        </p>
+        <div class="targets">
+          <p class="transmitter" tabindex="0" draggable="true">
+            <span>
+              <strong>Drag or copy me!</strong><br />
+              <em>Containing HTML, Text, URL and JSON data.</em>
+            </span>
+          </p>
+          <p class="receiver" tabindex="0">
+            <span>Drop or paste here!</span>
+          </p>
+        </div>
+      </div>
+
+      <hr />
 
       <h2>Getting started</h2>
       <ol>
