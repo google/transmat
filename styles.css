@@ -169,7 +169,7 @@ header a {
 .browser {
   line-height: 1;
   border-radius: 8px;
-  border: solid 1px #000;
+  border: solid 1px rgba(0,0,0,.7);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -180,7 +180,7 @@ header a {
   padding: 4px 16px;
   text-align: right;
   flex: none;
-  border-bottom: solid 1px #000;
+  border-bottom: solid 1px rgba(0,0,0,.7);
 }
 
 .browser .controls span {
@@ -260,7 +260,7 @@ header a {
   padding: 10px;
   font: 1em Helvetica, Arial, sans-serif;
   background: #fff;
-  border: solid 2px #000;
+  border: solid 2px #111;
   border-radius: 8px;
   position: relative;
   height: 25%;
