@@ -20,7 +20,7 @@ a {
 hr {
   margin: 2em 0;
   height: 0;
-  border: solid 5px #f5f5f5;
+  border: solid 5px #f5f2f0;
 }
 
 /**
@@ -139,7 +139,7 @@ header a {
 }
 
 .demo .transmitter:hover {
-  background: #f0f0f0;
+  background: #f5f2f0;
 }
 
 .demo .receiver {
