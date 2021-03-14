@@ -7,6 +7,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ua-desktop .desktop-only { display: none; }
+
 body {
   font: 400 1em/1.6 'Poppins', sans-serif;
   margin: 0;
@@ -107,6 +109,13 @@ header a {
 .demo .intro {
   font-size: 1.1em;
   text-align: center;
+}
+
+.demo .desktop-only {
+  color: #c00;
+  text-align: center;
+  font-size: .9em;
+  font-weight: bold;
 }
 
 .demo .targets {

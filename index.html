@@ -1,6 +1,10 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en-US">
 <head>
+  <script>
+    const className = navigator.userAgent.match(/mobile|android|iphone|ipad/i);
+    document.querySelector('html').className = className ? 'ua-mobile' : 'ua-desktop';
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#ffd966" />
   <title>Transmat - Share data beyond the boundaries of the browser</title>
@@ -71,6 +75,9 @@
           <a href="https://google.github.io/transmat" target="_blank">browser window</a>,
           a <a href="https://codepen.io/pen" target="_blank">text editor</a> or
           <a href="https://doc.new" target="_blank">WYSIWYG editor</a>.
+        </p>
+        <p class="desktop-only">
+          It looks like you're on mobile. Sorry, Transmat works only on desktop!
         </p>
         <div class="targets">
           <p class="transmitter" tabindex="0" draggable="true">
