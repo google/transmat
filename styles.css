@@ -18,7 +18,7 @@ a {
 }
 
 hr {
-  margin: 2em 0;
+  margin: 3em 0;
   height: 0;
   border: solid 5px #f5f2f0;
 }
@@ -34,7 +34,7 @@ hr {
 
 .container {
   max-width: 1000px;
-  padding: 1.5em;
+  padding: 3em 1.5em;
   margin: 0 auto;
 }
 
