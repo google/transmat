@@ -15,7 +15,9 @@ body {
   color: #111;
 }
 
+.minimal-drag-image,
 a {
+  text-decoration: underline;
   color: blue;
 }
 
@@ -25,12 +27,7 @@ hr {
   border: solid 5px #f5f2f0;
 }
 
-/**
- * At least in Chrome, when an element is set to draggable, user select is
- * disabled. Re-enable this to allow the user to copy/cut the data.
- */
-[draggable][tabindex] {
-  user-select: auto;
+[draggable] {
   cursor: move;
 }
 
