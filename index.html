@@ -175,6 +175,44 @@ transmat.setData('application/ld+json', person);</code></pre>
 
       <hr />
 
+      <h2>Observing transfer events</h2>
+      <p>You can make use of the included TransmatObserver class to respond to drag activity. An
+        example is at the this webpage, where the drop targets respond to the drag events.</p>
+
+        <pre class="language-js"><code>import {TransmatObserver, Transmat} from 'transmat';
+
+const obs = new TransmatObserver(entries => {
+  for (const entry of entries) {
+    const transmat = new Transmat(entry.event);
+    if(transmat.hasMimeType(myCustomMimeType)) {
+      entry.target.classList.toggle('drag-over', entry.isTarget);
+      entry.target.classList.toggle('drag-active', entry.isActive);
+    }
+  }
+});
+obs.observe(myElement);</code></pre>
+
+      <hr />
+
+      <h2>Minimal drag image</h2>
+      <p>By default, HTML5 Drag and Drop API drag image is showing the rendered source element.
+        When applying Transmat on top of existing drag-drop interactions you might want something
+        more subtle instead.</p>
+      <p>Transmat comes with a small function that replaces this with a minimal alternative that
+        still gives the feeling of dragging an object.
+        <a href="#" class="minimal-drag-image" draggable="true">Drag me for an example</a>, and
+        notice the checkered rectangle.</p>
+
+        <pre class="language-js"><code>import {Transmat, addListeners} from 'transmat';
+import {setMinimalDragImage} from 'transmat/data_transfer';
+
+addListeners(myElement, 'transmit', event => {
+  const transmat = new Transmat(event);
+  setMinimalDragImage(transmat.dataTransfer);
+});</code></pre>
+
+      <hr />
+
       <h2>Learn more</h2>
       <p>More documentation and examples at the <a href="https://GitHub.com/google/transmat">GitHub repository</a>.</p>
       <p><em>This is not an officially supported Google product.</em></p>

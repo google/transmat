@@ -4,6 +4,17 @@ import {
   addListeners,
 } from "https://cdn.skypack.dev/transmat@0.1.0";
 import { default as jsonLd } from "https://cdn.skypack.dev/transmat@0.1.0/dist/json_ld.js";
+import { default as dt } from "https://cdn.skypack.dev/transmat@0.1.0/dist/data_transfer.js";
+
+addListeners(
+  document.querySelector(".minimal-drag-image"),
+  "transmit",
+  (event) => {
+    const transmat = new Transmat(event);
+    dt.setMinimalDragImage(transmat.dataTransfer);
+    transmat.setData("text/plain", "This is a demo!");
+  }
+);
 
 addListeners(document.querySelector(".transmitter"), "transmit", (event) => {
   const data = {
@@ -29,7 +40,7 @@ addListeners(document.querySelector(".receiver"), "receive", (event) => {
     document.querySelector(".results").classList.add("show");
     for (const type of transfer.dataTransfer.types) {
       const data = transfer.getData(type);
-      log(`${type}: ${data}`);
+      log(`${type}:\n${data}\n`);
       console.log({ type, data });
     }
     updateReceiverText(`
@@ -40,8 +51,7 @@ addListeners(document.querySelector(".receiver"), "receive", (event) => {
 
 const logEl = document.querySelector(".demo .results code");
 function log(strLine) {
-  logEl.appendChild(document.createTextNode(strLine));
-  logEl.appendChild(document.createElement("br"));
+  logEl.appendChild(document.createTextNode(strLine + "\n"));
 }
 
 function clearLog() {
