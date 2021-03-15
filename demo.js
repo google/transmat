@@ -25,15 +25,28 @@ addListeners(document.querySelector(".transmitter"), "transmit", (event) => {
 addListeners(document.querySelector(".receiver"), "receive", (event) => {
   const transfer = new Transmat(event);
   if (transfer.accept("copy")) {
-    console.log("Received the following data:");
+    clearLog();
+    document.querySelector(".results").classList.add("show");
     for (const type of transfer.dataTransfer.types) {
-      console.log({ type, data: transfer.getData(type) });
+      const data = transfer.getData(type);
+      log(`${type}: ${data}`);
+      console.log({ type, data });
     }
     updateReceiverText(`
         <strong>Data received.</strong><br />
-        <em>Open your console to review</em>`);
+        <em>Check out your console or the log below.</em>`);
   }
 });
+
+const logEl = document.querySelector(".demo .results code");
+function log(strLine) {
+  logEl.appendChild(document.createTextNode(strLine));
+  logEl.appendChild(document.createElement("br"));
+}
+
+function clearLog() {
+  logEl.innerHTML = "";
+}
 
 let resetTimer = null;
 function updateReceiverText(text) {

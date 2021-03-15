@@ -173,6 +173,13 @@ header a {
   background: rgba(0, 255, 0, .1);
 }
 
+.demo .results {
+  display: none;
+}
+
+.demo .results.show {
+  display: block;
+}
 
 /** Animation */
 .browser {
