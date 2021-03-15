@@ -13,6 +13,8 @@ Transmat will help you setting up the necessarily drag-drop and copy-paste
 interactions, and help you in transferring (both transmitting and receiving) the
 data.
 
+*This is not an officially supported Google product.*
+
 ### Transmitting data
 The DataTransfer payload consists of simple string-based key value pairs. When
 providing mime-types keys and their expected data, new integrations can happen,
