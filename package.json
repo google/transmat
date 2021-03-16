@@ -1,11 +1,11 @@
 {
   "name": "transmat",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "User interaction across applications using the DataTransfer API",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "files": [
-    "dist/**/*"
+    "lib/**/*"
   ],
   "repository": "github:google/transmat",
   "homepage": "https://google.github.io/transmat",
