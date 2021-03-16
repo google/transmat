@@ -5,7 +5,7 @@
   "main": "demo.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild src/index.ts --outfile=dist/index.js --bundle"
+    "build": "tsc -noEmit && esbuild src/index.ts --outfile=dist/index.js --log-level=info --bundle"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,6 @@
   "dependencies": {
     "esbuild": "^0.9.2",
     "gts": "^3.1.0",
-    "transmat": "^0.1.0"
+    "transmat": "^0.2.0"
   }
 }

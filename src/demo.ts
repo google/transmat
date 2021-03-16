@@ -1,13 +1,13 @@
 import { Transmat, TransmatObserver, addListeners } from "transmat";
-import * as jsonLd from "transmat/dist/json_ld";
-import * as dataTransfer from "transmat/dist/data_transfer";
+import * as jsonLd from "transmat/lib/json_ld";
+import * as dataTransfer from "transmat/lib/data_transfer";
 
 addListeners(
   document.querySelector(".minimal-drag-image")!,
   "transmit",
   (event) => {
     const transmat = new Transmat(event);
-    dt.setMinimalDragImage(transmat.dataTransfer);
+    dataTransfer.setMinimalDragImage(transmat.dataTransfer);
     transmat.setData("text/plain", "This is a demo!");
   }
 );
@@ -25,7 +25,7 @@ addListeners(document.querySelector(".transmitter")!, "transmit", (event) => {
     "text/uri-list": data.url,
     "text/plain": `${data.name}`,
     "text/html": `<a href="${data.url}"><img src="${data.image}" alt="${data.name}" /></a>`,
-    [jsonLd.MIME_TYPE]: jsonLd.fromObject(data),
+    [jsonLd.MIME_TYPE]: jsonLd.fromObject(data as any),
   });
 });
 

@@ -25,18 +25,18 @@
     return __exportStar(__markAsModule(__defProp(module != null ? __create(__getProtoOf(module)) : {}, "default", module && module.__esModule && "default" in module ? {get: () => module.default, enumerable: true} : {value: module, enumerable: true})), module);
   };
 
-  // node_modules/transmat/dist/data_transfer.js
+  // node_modules/transmat/lib/data_transfer.js
   var require_data_transfer = __commonJS((exports) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
     exports.setMinimalDragImage = exports.normalizeType = exports.getDataTransfer = void 0;
     function getDataTransfer(event) {
       var _a;
-      const dataTransfer = (_a = event.clipboardData) !== null && _a !== void 0 ? _a : event.dataTransfer;
-      if (!dataTransfer) {
+      const dataTransfer2 = (_a = event.clipboardData) !== null && _a !== void 0 ? _a : event.dataTransfer;
+      if (!dataTransfer2) {
         throw new Error("No DataTransfer available at this event.");
       }
-      return dataTransfer;
+      return dataTransfer2;
     }
     exports.getDataTransfer = getDataTransfer;
     function normalizeType(input) {
@@ -51,7 +51,7 @@
       }
     }
     exports.normalizeType = normalizeType;
-    function setMinimalDragImage(transfer, width = 22, height = 18, square = 2, border = 4, colorA = "rgba(255,255,255,.5)", colorB = "rgba(0,0,0,.5)") {
+    function setMinimalDragImage2(transfer, width = 22, height = 18, square = 2, border = 4, colorA = "rgba(255,255,255,.5)", colorB = "rgba(0,0,0,.5)") {
       const canvas = document.createElement("canvas");
       canvas.width = width;
       canvas.height = height;
@@ -75,10 +75,10 @@
         canvas.remove();
       });
     }
-    exports.setMinimalDragImage = setMinimalDragImage;
+    exports.setMinimalDragImage = setMinimalDragImage2;
   });
 
-  // node_modules/transmat/dist/mime_type.js
+  // node_modules/transmat/lib/mime_type.js
   var require_mime_type = __commonJS((exports) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
@@ -112,7 +112,7 @@
     exports.match = match;
   });
 
-  // node_modules/transmat/dist/utils.js
+  // node_modules/transmat/lib/utils.js
   var require_utils = __commonJS((exports) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
@@ -134,7 +134,7 @@
     exports.removeEventListeners = removeEventListeners;
   });
 
-  // node_modules/transmat/dist/transmat.js
+  // node_modules/transmat/lib/transmat.js
   var require_transmat = __commonJS((exports) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
@@ -216,7 +216,7 @@
     exports.addListeners = addListeners2;
   });
 
-  // node_modules/transmat/dist/transmat_observer.js
+  // node_modules/transmat/lib/transmat_observer.js
   var require_transmat_observer = __commonJS((exports) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
@@ -285,8 +285,8 @@
     }
   });
 
-  // node_modules/transmat/dist/index.js
-  var require_dist = __commonJS((exports) => {
+  // node_modules/transmat/lib/index.js
+  var require_lib = __commonJS((exports) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
     exports.TransmatObserver = exports.addListeners = exports.Transmat = void 0;
@@ -303,7 +303,7 @@
     }});
   });
 
-  // node_modules/transmat/dist/json_ld.js
+  // node_modules/transmat/lib/json_ld.js
   var require_json_ld = __commonJS((exports) => {
     "use strict";
     Object.defineProperty(exports, "__esModule", {value: true});
@@ -394,11 +394,12 @@
   });
 
   // src/demo.ts
-  var import_transmat = __toModule(require_dist());
+  var import_transmat = __toModule(require_lib());
   var jsonLd = __toModule(require_json_ld());
+  var dataTransfer = __toModule(require_data_transfer());
   (0, import_transmat.addListeners)(document.querySelector(".minimal-drag-image"), "transmit", (event) => {
     const transmat = new import_transmat.Transmat(event);
-    dt.setMinimalDragImage(transmat.dataTransfer);
+    dataTransfer.setMinimalDragImage(transmat.dataTransfer);
     transmat.setData("text/plain", "This is a demo!");
   });
   (0, import_transmat.addListeners)(document.querySelector(".transmitter"), "transmit", (event) => {
