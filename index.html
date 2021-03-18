@@ -20,7 +20,13 @@
           <strong>Seamless cross web interactions</strong><br />
           Enable users to transfer data to external apps, and open your webapp to receive external data.
         </p>
-        <p><a class="button" href="https://GitHub.com/google/transmat">View on GitHub</a></p>
+        <p class="buttons">
+          <a class="button" href="https://GitHub.com/google/transmat">View on GitHub</a>
+          <a class="github-button" href="https://github.com/google/transmat" data-size="large"
+                data-show-count="true" aria-label="Star google/transmat on GitHub">
+              Star
+          </a>
+        </p>
       </div>
       <div class="intro-animation">
         <div class="animation">
@@ -55,8 +61,9 @@
 
   <section class="readme">
     <div class="container">
-      <img class="payloads" src="payloads.png" alt="Multiple payloads in a single transmit" />
-      <p><strong>
+      <p>
+        <img class="payloads" src="payloads.png" alt="Multiple payloads in a single transmit" />
+        <strong>
         Transmat is a small library around the
         <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer">DataTransfer API</a>
         that eases transmitting and receiving data in your web app using drag-drop and copy-paste
@@ -74,6 +81,7 @@
         <li>...want external applications to be able to deeply integrate with your web app.</li>
         <li>...want to make your app better fit in existing workflows of your user.</li>
       </ul>
+
     </div>
   </section>
 
@@ -225,12 +233,26 @@ transmat.setData('application/ld+json', person);</code></pre>
 
       <h2>Learn more</h2>
       <p>More documentation and examples at the <a href="https://GitHub.com/google/transmat">GitHub repository</a>.</p>
+<p class="social">
+    <a class="twitter-share-button"
+          href="https://twitter.com/intent/tweet?text=Seamless interactions across the web with the DataTransfer API. https://google.github.io/transmat"
+          data-size="large">
+      Share on Twitter
+    </a>
+
+    <a class="github-button" href="https://github.com/google/transmat" data-size="large"
+          data-show-count="true" aria-label="Star google/transmat on GitHub">
+      Star
+    </a>
+</p>
+
       <p><em>This is not an officially supported Google product.</em></p>
     </div>
   </section>
 
   <script async src="prismjs.js"></script>
   <script async src="dist/index.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WVGTJBXS6K"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -239,5 +261,21 @@ transmat.setData('application/ld+json', person);</code></pre>
 
     gtag('config', 'G-WVGTJBXS6K');
   </script>
+  <script>window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));</script>
 </body>
 </html>

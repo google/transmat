@@ -37,6 +37,12 @@ hr {
   margin: 0 auto;
 }
 
+@media screen and (max-width: 639px) {
+  .container {
+    padding: 2em 1.5em;
+  }
+}
+
 .button {
   display: inline-block;
   background: #111;
@@ -45,6 +51,7 @@ hr {
   padding: .4em 1.5em;
   cursor: hand;
   font-weight: normal;
+  line-height: 1.7;
   text-decoration: none;
 }
 
@@ -54,6 +61,10 @@ hr {
 
 header {
   background: #ffd966;
+}
+
+header h1 {
+  margin-top: 0;
 }
 
 header strong {
@@ -68,7 +79,7 @@ header a {
 @media screen and (max-width: 639px) {
   header .intro-animation {
     max-width: 350px;
-    margin: 2em auto 1em auto;
+    margin: 2m auto 1em auto;
   }
 }
 
@@ -80,6 +91,17 @@ header a {
     gap: 0 1.5em;
     align-items: center;
   }
+}
+
+header .buttons {
+  display: flex;
+  line-height: 1;
+  align-items: center;
+}
+
+header .buttons span { /* github button */
+  height: 28px;
+  margin-left: 1em;
 }
 
 /* Readme */
