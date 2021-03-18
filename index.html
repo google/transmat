@@ -139,40 +139,6 @@ addListeners(myElement, 'receive', event => {
         </li>
       </ol>
 
-
-      <hr />
-
-      <h2>Connecting the web, with JSON-LD</h2>
-      <p><img class="json-ld-logo" src="json-ld.png" alt="JSON-LD" />
-        While custom payloads are useful for communication between applications you have in your
-        control, it also limits the ability to transfer data to external apps.
-        <a href="https://json-ld.org">JSON-LD (Linked Data)</a> is a great universal standard for this;
-        </p>
-      <ul>
-        <li>Easy to generate from JavaScript,</li>
-        <li>Many predefined types at <a href="https://schema.org/Thing">Schema.org</a>,</li>
-        <li>It can contain custom schema definitions.</li>
-      </ul>
-      <p>JSON-LD might sound scarier than it is. Here’s an example of what this looks like for a <a href="https://schema.org/Person">Person</a>:</p>
-        <pre class="language-js"><code>const person = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Rory Gilmore',
-  image: 'https://example.com/rory.jpg',
-  address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'USA',
-    addressRegion: 'Connecticut',
-    addressLocality: 'Stars Hollow'
-  },
-};
-transmat.setData('application/ld+json', person);</code></pre>
-      <p>Transmat comes with several <a href="https://github.com/google/transmat/blob/main/src/json_ld.ts">JSON-LD utilities</a> to ease common interactions with the data.</p>
-      <p>
-      By using JSON-LD data, you will <strong>support a connected and open web</strong>. Think of
-      all the possibilities when you could transfer elements to other applications to continue your work.
-      That would be great, right? <strong>This starts with you! 🙌</strong></p>
-
       <hr />
 
       <h2>Observing transfer events</h2>
@@ -212,6 +178,40 @@ addListeners(myElement, 'transmit', event => {
 });</code></pre>
 
       <hr />
+
+      <h2>Connecting the web, with JSON-LD</h2>
+      <p><img class="json-ld-logo" src="json-ld.png" alt="JSON-LD" />
+        While custom payloads are useful for communication between applications you have in your
+        control, it also limits the ability to transfer data to external apps.
+        <a href="https://json-ld.org">JSON-LD (Linked Data)</a> is a great universal standard for this;
+      </p>
+      <ul>
+        <li>Easy to generate from JavaScript,</li>
+        <li>Many predefined types at <a href="https://schema.org/Thing">Schema.org</a>,</li>
+        <li>It can contain custom schema definitions.</li>
+      </ul>
+      <p>JSON-LD might sound scarier than it is. Here’s an example of what this looks like for a <a href="https://schema.org/Person">Person</a>:</p>
+        <pre class="language-js"><code>const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Rory Gilmore',
+  image: 'https://example.com/rory.jpg',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'USA',
+    addressRegion: 'Connecticut',
+    addressLocality: 'Stars Hollow'
+  },
+};
+transmat.setData('application/ld+json', person);</code></pre>
+      <p>Transmat comes with several <a href="https://github.com/google/transmat/blob/main/src/json_ld.ts">JSON-LD utilities</a> to ease common interactions with the data.</p>
+      <p>
+      By using JSON-LD data, you will <strong>support a connected and open web</strong>. Think of
+      all the possibilities when you could transfer elements to other applications to continue your work.
+      That would be great, right? <strong>This starts with you! 🙌</strong></p>
+
+      <hr />
+
 
       <h2>Learn more</h2>
       <p>More documentation and examples at the <a href="https://GitHub.com/google/transmat">GitHub repository</a>.</p>
