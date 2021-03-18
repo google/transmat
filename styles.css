@@ -99,7 +99,11 @@ header .buttons {
   align-items: center;
 }
 
-header .buttons span { /* github button */
+header .buttons .github-button { /* Hide placeholder */
+  display: none;
+}
+
+header .buttons span { /* github button after loading */
   height: 28px;
   margin-left: 1em;
 }
