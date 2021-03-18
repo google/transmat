@@ -79,7 +79,7 @@ header a {
 @media screen and (max-width: 639px) {
   header .intro-animation {
     max-width: 350px;
-    margin: 2m auto 1em auto;
+    margin: 2em auto 1em auto;
   }
 }
 
