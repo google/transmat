@@ -10,7 +10,7 @@ html {
 .ua-desktop .desktop-only { display: none; }
 
 body {
-  font: 400 1em/1.6 'Poppins', sans-serif;
+  font: 400 1em/1.65 'Poppins', sans-serif;
   margin: 0;
   color: #111;
 }
@@ -103,6 +103,10 @@ header a {
 
 
 /* Demo */
+.demo {
+  background: #f5f2f0;
+}
+
 .demo .intro {
   font-size: 1.1em;
   text-align: center;
@@ -141,11 +145,20 @@ header a {
 
 .demo .transmitter {
   cursor: move;
-  border: solid 2px #666;
+  border: solid 2px rgba(0,0,0,.5);
+  background: white;
 }
 
 .demo .transmitter:hover {
-  background: #f5f2f0;
+  border: solid 2px #000;
+}
+
+.demo .transmitter:focus,
+.demo .receiver:focus,
+.demo .transmitter:focus-within,
+.demo .receiver:focus-within {
+  outline: none;
+  border-color: blue;
 }
 
 .demo .receiver {
@@ -176,6 +189,10 @@ header a {
 
 .demo .results.show {
   display: block;
+}
+
+.demo .results pre {
+  border-color: white;
 }
 
 /** Animation */
@@ -390,7 +407,7 @@ pre[class*="language-"] {
 	background: none;
 	text-shadow: 0 1px white;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: .95em;
+	font-size: .9em;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
