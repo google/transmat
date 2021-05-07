@@ -7,7 +7,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ua-desktop .desktop-only { display: none; }
+.ua-desktop .show-on-mobile { display: none !important; }
+.ua-mobile .show-on-desktop { display: none !important; }
 
 body {
   font: 400 1em/1.65 'Poppins', sans-serif;
@@ -25,6 +26,7 @@ hr {
   margin: 3em 0;
   height: 0;
   border: solid 5px #f5f2f0;
+  border-radius: 8px;
 }
 
 [draggable] {
@@ -127,6 +129,46 @@ header .buttons span { /* github button after loading */
   margin-bottom: 1.5em;
 }
 
+.webdev {
+  display: block;
+  background: #ffd96622;
+  border: solid 1px rgba(0,0,0,.2);
+  padding: 1em;
+  text-decoration: none;
+  color: #111;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+  border-radius: 8px;
+}
+
+.webdev:hover {
+  background: #ffd96633;
+}
+
+.webdev img {
+  width: 20%;
+  max-width: 150px;
+  margin-right: 1.5em;
+}
+
+@media screen and (max-width: 639px) {
+  .webdev img { display: none; }
+}
+
+.webdev .content {
+  max-width: 600px;
+}
+
+.webdev h2 {
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.1em;
+}
+
+.webdev p {
+  margin: 0;
+}
 
 /* Demo */
 .demo {
@@ -138,17 +180,26 @@ header .buttons span { /* github button after loading */
   text-align: center;
 }
 
-.demo .desktop-only {
-  color: #e00;
-  text-align: center;
-  font-size: .9em;
-  font-weight: bold;
+.demo .video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 51.4%;
+  margin: 0 auto;
+}
+
+.demo .video iframe {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .demo .targets {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 0 1.5em;
+  margin-bottom: 1.5em;
 }
 
 .demo .transmitter,

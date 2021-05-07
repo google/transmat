@@ -85,16 +85,28 @@
     </div>
   </section>
 
-  <section class="demo">
+  <section class="demo show-on-mobile">
+    <div class="container">
+      <h2>Demo</h2>
+      <p>Transmat only works on desktop browsers. Watch the demo video below.</p>
+      <div class="video">
+        <iframe width="560" height="315" 
+            src="https://www.youtube.com/embed/EYMgUhn_Zdo?autoplay=1&controls=0&fs=0&loop=1&modestbranding=1" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo show-on-desktop">
     <div class="container">
       <p class="intro">
         <strong>Drag or copy the element below</strong> to a new
         <a href="https://google.github.io/transmat" target="_blank">browser window</a>,
         a <a href="https://codepen.io/pen" target="_blank">text editor</a> or
         <a href="https://doc.new" target="_blank">WYSIWYG editor</a>.
-      </p>
-      <p class="desktop-only">
-        It looks like you're on mobile. Sorry, Transmat works only on desktop!
       </p>
       <div class="targets">
         <p class="transmitter" tabindex="0" draggable="true">
@@ -156,6 +168,14 @@ addListeners(myElement, 'receive', event => {
 });</code></pre>
         </li>
       </ol>
+
+      <a class="webdev" href="https://web.dev/datatransfer">
+        <img src="https://web.dev/images/lockup.svg" alt="web.dev" width="120" />
+        <div class="content">
+          <h2>Read the DataTransfer article on web.dev</h2>
+          <p>Explaining the used transferring technique in detail, listing some concerns and opportunities for your applications. <u>Learn more.</u></p>
+        </div>
+      </a>
 
       <hr />
 
