@@ -138,7 +138,7 @@ header .buttons span { /* github button after loading */
   color: #111;
   display: flex;
   align-items: center;
-  margin-bottom: 2em;
+  margin-top: 2em;
   border-radius: 8px;
 }
 
