@@ -1,6 +1,6 @@
 {
   "name": "transmat",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "User interaction across applications using the DataTransfer API",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -25,6 +25,8 @@
     "karma-chrome-launcher": "^3.1.0",
     "karma-jasmine": "^4.0.1",
     "karma-typescript": "^5.4.0",
+    "rollup": "^2.47.0",
+    "rollup-plugin-commonjs": "^10.1.0",
     "snowpack": "^3.0.13",
     "typescript": "^4.2.2"
   },
@@ -34,11 +36,12 @@
     "lint": "gts lint experiments/ src/",
     "clean": "gts clean experiments/ src/ && rm -rf ./coverage",
     "compile": "tsc",
+    "bundle-umd": "rollup lib/index.js --file lib/index.umd.js -p rollup-plugin-commonjs --format umd --name transmat",
     "fix": "gts fix experiments/ src/",
     "license": "$GOPATH/bin/addlicense -c \"Google LLC\" -l apache ./src ./experiments",
     "license-check": "jsgl --local .",
     "prepare": "npm run compile",
-    "prepublish": "npm run license-check && npm run lint && npm run clean && npm run compile"
+    "prepublish": "npm run license-check && npm run lint && npm run clean && npm run compile && npm run bundle-umd"
   },
   "dependencies": {
     "schema-dts": "^0.8.2"
