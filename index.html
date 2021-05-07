@@ -133,9 +133,13 @@
           <p>Install the library from <a href="https://npmjs.com/transmat">NPM</a> (version 0.2.1).
             <pre class="language-js"><code>npm install transmat</code></pre></p>
 
-          <p>You can also import the UMD build from a JavaScript CDN like UNPKG,  
-            <a href="https://unpkg.com/transmat/lib/index.umd.js">unpkg.com/transmat/lib/index.umd.js</a>. The library is exported to the transmat object namespace.
-            <pre class="language-js"><code>transmat.Transmat</code></pre></p>
+          <p>Alternatively, you can load the <a href="https://unpkg.com/transmat/lib/index.umd.js">index.umd.js</a> UMD build from a JavaScript CDN like UNPKG. 
+            The library is exported to the transmat object namespace.
+            <pre class="language-html"><code>&lt;script src="https://unpkg.com/transmat/lib/index.umd.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Use transmat.addListeners, transmat.Transmat, etc...
+&lt;/script&gt;
+</code></pre></p>
         </li>
         <li>Add a draggable and focusable element to your webpage.
           <pre class="language-html"><code>&lt;div id="myElement" draggable="true" tabindex="0"&gt;
