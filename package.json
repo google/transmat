@@ -3,6 +3,7 @@
   "version": "0.2.1",
   "description": "User interaction across applications using the DataTransfer API",
   "main": "./lib/index.js",
+  "umd:main": "./lib/index.umd.js",
   "types": "./lib/index.d.ts",
   "files": [
     "lib/**/*"
