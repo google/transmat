@@ -37,7 +37,7 @@
     "lint": "gts lint experiments/ src/",
     "clean": "gts clean experiments/ src/ && rm -rf ./coverage",
     "compile": "tsc",
-    "bundle-umd": "rollup lib/index.js --file lib/index.umd.js -p rollup-plugin-commonjs --format umd --name transmat",
+    "bundle-umd": "rollup lib/index.js --file lib/index.umd.js -p commonjs --format umd --name transmat",
     "fix": "gts fix experiments/ src/",
     "license": "$GOPATH/bin/addlicense -c \"Google LLC\" -l apache ./src ./experiments",
     "license-check": "jsgl --local .",
